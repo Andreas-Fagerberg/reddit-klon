@@ -1,0 +1,58 @@
+/* || WIP styles. Mostly borders and such */
+body {
+  border: 2px solid yellow;
+}
+
+#page-wrapper {
+  border: 2px solid pink;
+}
+
+nav {
+  border: 2px solid red;
+}
+
+#nav-links {
+  border: 2px solid rebeccapurple;
+}
+
+.nav-item {
+  border: 2px solid greenyellow;
+}
+
+main {
+  border: 2px solid skyblue;
+}
+
+/* || General styles */
+
+/* || Nav styles */
+
+nav {
+  display: flex;
+  border: 2px solid red;
+}
+
+#nav-links {
+  padding: 0;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  list-style: none;
+}
+
+.nav-item {
+  border: 2px solid greenyellow;
+}
+
+
+/* || Main styles */
+
+main {
+  height: 75rem;
+}
+/* || Footer styles */
+
+footer {
+  display: flex;
+  justify-content: center;
+}
