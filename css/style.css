@@ -1,4 +1,4 @@
-/* || WIP styles. Mostly borders and such */
+/* || WIP styles. Mostly borders and such
 body {
   border: 2px solid yellow;
 }
@@ -21,15 +21,45 @@ nav {
 
 main {
   border: 2px solid skyblue;
-}
+} */
 
 /* || General styles */
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Make the page wrapper fill the available width */
+#page-wrapper {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Modify the header styles */
+header {
+  display: flex;
+  width: 100vw; /* viewport width */
+  height: 4.2rem;
+  border-bottom: 0.02rem solid grey;
+  /* padding-bottom: 0.2rem; */
+  box-sizing: border-box; /* includes padding and border in width calculation */
+}
+
+#logo-image {
+  width: 11rem;
+  margin-top: 0.5rem;
+  margin-left: 1rem;
+}
 
 /* || Nav styles */
 
 nav {
   display: flex;
-  border: 2px solid red;
+  width: 55%;
+  margin-top: 0.5rem;
+  margin-left: auto;
+  margin-right: 3rem;
 }
 
 #nav-links {
@@ -40,10 +70,18 @@ nav {
   list-style: none;
 }
 
-.nav-item {
-  border: 2px solid greenyellow;
+#nav-search-bar {
+  display: flex;
+  width: 20rem;
 }
 
+#nav-search-button {
+  width: 25%;
+}
+
+#nav-search-field {
+  width: 75%;
+}
 
 /* || Main styles */
 
