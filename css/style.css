@@ -24,13 +24,11 @@ main > div{
 } 
  */
 
-
 /* || General styles */
 body {
   margin: 0;
   padding: 0;
 }
-
 
 #page-wrapper {
   width: 100%;
@@ -41,13 +39,12 @@ body {
 header {
   background-color: rgb(35, 34, 34);
   display: flex;
-  width: 100vw; 
+  width: 100vw;
   height: 6rem;
   align-items: center;
   border-bottom: 0.02rem solid rgba(176, 176, 176, 0.879);
-  box-sizing: border-box; 
+  box-sizing: border-box;
 }
-
 
 /* || Nav styles */
 nav {
@@ -68,8 +65,6 @@ nav a {
   flex: 1;
 }
 
-
-
 #nav-search-container {
   display: flex;
   margin: 0 auto;
@@ -83,9 +78,11 @@ nav a {
 #nav-create-post-container {
   display: flex;
   justify-content: flex-end;
+  text-align: center;
   flex: 1;
   margin-left: auto;
-  white-space: nowrap;
+  align-items: center;
+  /* white-space: nowrap; */
 }
 
 #nav-create-post-container,
@@ -109,39 +106,54 @@ nav a {
   padding-left: 1.1rem;
   outline: none;
   background-color: rgb(226, 226, 226);
-  color: rgb(22, 22, 22) ;
   border: none;
   font-size: 0.9rem;
   border-right: 0.05rem solid;
-  /* border-radius: 2rem; */
+}
+
+#nav-search-field::placeholder {
+  color: rgb(117, 114, 114);
+}
+
+#nav-search-field:hover {
+  background-color: rgb(219, 217, 217);
+}
+
+#nav-search-field:hover::placeholder {
+  color: rgb(68, 68, 68);
 }
 
 #nav-search-button,
 #nav-create-post-button {
-  font-size: 0.9rem;
   height: 100%;
   box-sizing: border-box;
+  border: none;
+  background-color: rgb(196, 194, 194);
+  color: rgb(57, 57, 57);
+  font-size: 0.9rem;
 }
 
 #nav-create-post-button {
-  width: 7rem;
+  display: flex;
+  width: 8rem;
+  border-radius: 2rem;
+  overflow: hidden;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.8rem;
 }
-
-#nav-search-field:hover {
-  background-color: rgba(200, 200, 200, 0.776);
-}
-
 
 #nav-search-button {
-  border: none;
   width: 25%;
   height: 100%;
-  background-color: rgb(202, 202, 202);
   box-sizing: border-box;
   padding: 0 1rem;
 }
-#nav-search-button:hover {
-  background-color: rgba(223, 222, 222, 0.781);
+
+#nav-search-button:hover,
+#nav-create-post-button:hover {
+  background-color: rgb(210, 209, 209);
+  color: rgb(51, 51, 51);
 }
 
 /* || Main styles */
@@ -158,12 +170,10 @@ main {
 }
 
 #main-left-sidebar {
- 
-} 
+}
 
 #main-right-sidebar {
- 
-} 
+}
 
 #main-content {
   width: 60%;
@@ -172,12 +182,10 @@ main {
   border-right: 0.001rem solid rgb(231, 231, 231); */
 }
 
-
 /* || Footer styles */
 
 footer {
   display: flex;
-  
-  margin: 1rem;
 
+  margin: 1rem;
 }
