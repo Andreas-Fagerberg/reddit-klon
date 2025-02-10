@@ -23,6 +23,10 @@ main > div{
   border: 1px solid skyblue;
 } 
  */
+.main-post-container {
+  border: 1px solid rgb(142, 142, 142);
+}
+
 
 /* || General styles */
 body {
@@ -158,6 +162,16 @@ nav a {
 
 /* || Main styles */
 
+.main-post-container {
+  width: 95%;
+  height: fit-content;
+  border-radius: 0.4rem;
+
+}
+
+
+/* || Main styles non container */
+
 main {
   display: flex;
   height: 75rem;
@@ -176,7 +190,9 @@ main {
 }
 
 #main-content {
+  display: flex;
   width: 60%;
+  justify-content: center;
   background-color: rgb(255, 255, 255);
   /* border-left: 0.001rem solid rgba(231, 231, 231, 0.819);
   border-right: 0.001rem solid rgb(231, 231, 231); */
