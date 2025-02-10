@@ -9,29 +9,30 @@
   <body>
     <div id="page-wrapper">
       <header>
-        <div id="logo-container">
-          <img
-            id="logo-image"
-            src="/images/mini-reddit-clone-img-svg-version.svg"
-            alt="REDDIT? reddit robot emoji."
-          />
-        </div>
         <nav>
-          <ul id="nav-links">
-            <li class="nav-item" id="nav-search-bar">
-              <input
-                id="nav-search-field"
-                type="text"
-                placeholder="Search..."
-              /><button id="nav-search-button">Search</button>
-            </li>
-            <li class="nav-item">
-              <button id="nav-create-post-button">Create post</button>
-            </li>
-          </ul>
+          <div id="nav-logo-container">
+            <a href="index.html">
+            <img
+              id="logo-image"
+              src="/images/mini-reddit-clone-img-svg-version.svg"
+              alt="REDDIT?"
+            />
+          </a>
+          </div>
+          <div id="nav-search-container">
+            <input id="nav-search-field" type="text" placeholder="Search..." />
+            <button id="nav-search-button">Search</button>
+          </div>
+          <div id="nav-create-post-container">
+            <button id="nav-create-post-button">Create post</button>
+          </div>
         </nav>
       </header>
-      <main></main>
+      <main>
+        <div class="sidebar" id="main-left-sidebar">A</div>
+        <div id="main-content">B</div>
+        <div class="sidebar" id="main-right-sidebar">C</div>
+      </main>
       <footer>Created by:</footer>
     </div>
   </body>
