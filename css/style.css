@@ -39,7 +39,7 @@ body {
 }
 
 header {
-  background-color: rgb(56, 53, 53);
+  background-color: rgb(35, 34, 34);
   display: flex;
   width: 100vw; 
   height: 6rem;
@@ -62,20 +62,22 @@ nav {
 
 nav a {
   display: contents;
-  
 }
 
 #nav-logo-container {
   flex: 1;
 }
 
+
+
 #nav-search-container {
   display: flex;
   margin: 0 auto;
   width: 27rem;
+  border-radius: 2rem;
+  overflow: hidden;
   /* max-width: 50%; */
   /* height: 2.2rem; */
-  display: flex;
 }
 
 #nav-create-post-container {
@@ -90,9 +92,7 @@ nav a {
 #nav-search-container {
   height: 100%;
   box-sizing: border-box;
-
 }
-
 
 /* || Nav styles non containers */
 
@@ -102,29 +102,46 @@ nav a {
   margin-left: 1rem;
 }
 
-#nav-search-button,
-#nav-create-post-button {
+#nav-search-field {
+  width: 75%;
   height: 100%;
   box-sizing: border-box;
+  padding-left: 1.1rem;
+  outline: none;
+  background-color: rgb(226, 226, 226);
+  color: rgb(22, 22, 22) ;
+  border: none;
+  font-size: 0.9rem;
+  border-right: 0.05rem solid;
+  /* border-radius: 2rem; */
+}
 
+#nav-search-button,
+#nav-create-post-button {
+  font-size: 0.9rem;
+  height: 100%;
+  box-sizing: border-box;
 }
 
 #nav-create-post-button {
   width: 7rem;
 }
 
-#nav-search-field {
-  width: 75%;
-  height: 100%;
-  box-sizing: border-box;
-  padding: 0.5rem;
+#nav-search-field:hover {
+  background-color: rgba(200, 200, 200, 0.776);
 }
 
+
 #nav-search-button {
+  border: none;
   width: 25%;
   height: 100%;
+  background-color: rgb(202, 202, 202);
   box-sizing: border-box;
   padding: 0 1rem;
+}
+#nav-search-button:hover {
+  background-color: rgba(223, 222, 222, 0.781);
 }
 
 /* || Main styles */
