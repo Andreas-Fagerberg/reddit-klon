@@ -1,0 +1,1 @@
+// Use promise.all to await all fetch calls. 

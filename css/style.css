@@ -163,10 +163,24 @@ nav a {
 /* || Main styles */
 
 .main-post-container {
-  width: 95%;
+  /* display: flex;
+  flex-direction: column; */
+  width: 86%;
   height: fit-content;
   border-radius: 0.4rem;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  background-color: rgb(41, 39, 39);
+  color: azure;
+  /* padding-bottom: 0.7rem; */
+  padding-left:  0.7rem;
+  padding-right:  0.7rem;
+  border: solid 2px rgb(98, 97, 97);
+  box-shadow: 0.1rem 0.1rem 0.2rem rgba(21, 21, 21, 0.523);
+}
 
+#post-heading {
+  /* padding-top: 0.3rem; */
 }
 
 
