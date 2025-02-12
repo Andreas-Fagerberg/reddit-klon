@@ -23,7 +23,7 @@ main > div{
   border: 1px solid skyblue;
 } 
  */
-.main-post-container {
+.post-main-container {
   border: 1px solid rgb(142, 142, 142);
 }
 
@@ -32,6 +32,7 @@ main > div{
 body {
   margin: 0;
   padding: 0;
+  font-family: Inter, Geneva, Verdana, sans-serif;
 }
 
 #page-wrapper {
@@ -162,27 +163,78 @@ nav a {
 
 /* || Main styles */
 
-.main-post-container {
-  /* display: flex;
-  flex-direction: column; */
+.post-main-container {
+  display: flex;
+  flex-direction: column;
   width: 86%;
   height: fit-content;
+  overflow: hidden;
   border-radius: 0.4rem;
-  margin-top: 1rem;
-  margin-bottom: 2rem;
+  margin-top: 2rem;
+
   background-color: rgb(41, 39, 39);
   color: rgb(255, 255, 255);
-  /* padding-bottom: 0.7rem; */
   padding-left:  0.7rem;
   padding-right:  0.7rem;
-  border: solid 2px rgb(98, 97, 97);
-  box-shadow: 0.1rem 0.1rem 0.2rem rgba(21, 21, 21, 0.523);
+  /* border: solid 1.5px rgb(98, 97, 97); */
+  border: solid 2px rgb(159, 159, 159);
+  /* box-shadow: 0.1rem 0.1rem 0.1rem rgba(21, 21, 21, 0.523); */
+}
+
+.post-main-container > h3 {
+ margin-top: 0.7rem;
+ margin-bottom: 0.1rem;
+}
+
+.post-main-content-container {
+  display: flex;
+  align-self: center;
+  width: 97%;
+  border-top: 0.1rem solid grey;
+  /* border-radius: 0.2rem; */
+  margin-top: 1rem;
+  margin-bottom: 0.2rem;
+}
+
+.post-main-content-container > p {
+  padding: 0.7rem;
+
 }
 
 #post-heading {
   /* padding-top: 0.3rem; */
 }
 
+.main-bottom-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.tags-container {
+  display: flex; flex-wrap: wrap;
+  max-width: 60%;
+  padding-bottom: 1rem;
+  width: max-content;
+
+}
+
+.tags-container > div 
+{
+  margin-top: 0.8rem;
+  margin-right: 0.8rem;
+  border-radius: 0.2rem;
+  background-color: rgb(135, 135, 135);
+  padding: 0.2rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.author-container {
+  display: flex;
+  width: 40%;
+  justify-content: right;
+  align-items: end;
+}
 
 /* || Main styles non container */
 
@@ -205,8 +257,9 @@ main {
 
 #main-content {
   display: flex;
+  flex-direction: column;
   width: 60%;
-  justify-content: center;
+  align-items: center;
   background-color: rgb(255, 255, 255);
   /* border-left: 0.001rem solid rgba(231, 231, 231, 0.819);
   border-right: 0.001rem solid rgb(231, 231, 231); */
@@ -216,6 +269,5 @@ main {
 
 footer {
   display: flex;
-
   margin: 1rem;
 }
