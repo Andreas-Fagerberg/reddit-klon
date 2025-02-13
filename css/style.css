@@ -163,7 +163,7 @@ nav a {
 
 /* || Main styles */
 
-.post-main-container {
+.post-container {
   display: flex;
   flex-direction: column;
   width: 86%;
@@ -181,12 +181,16 @@ nav a {
   /* box-shadow: 0.1rem 0.1rem 0.1rem rgba(21, 21, 21, 0.523); */
 }
 
-.post-main-container > h3 {
+#post-heading {
+  /* padding-top: 0.3rem; */
+}
+
+.post-container > h3 {
  margin-top: 0.7rem;
  margin-bottom: 0.1rem;
 }
 
-.post-main-content-container {
+.post-top-container {
   display: flex;
   align-self: center;
   width: 97%;
@@ -196,16 +200,11 @@ nav a {
   margin-bottom: 0.2rem;
 }
 
-.post-main-content-container > p {
+.post-top-container > p {
   padding: 0.7rem;
-
 }
 
-#post-heading {
-  /* padding-top: 0.3rem; */
-}
-
-.main-bottom-container {
+.post-bottom-container {
   display: flex;
   justify-content: space-between;
 }
