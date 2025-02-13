@@ -240,7 +240,7 @@ nav a {
 
 main {
   display: flex;
-  height: 75rem;
+
   border-bottom: 0.02rem solid rgba(176, 176, 176, 0.163);
 }
 
