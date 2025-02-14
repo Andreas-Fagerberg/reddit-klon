@@ -1,7 +1,7 @@
-import { api } from "./apiClient.js";
-import { User } from "./user.js";
-import { Post } from "./post.js";
-import { Comment } from "./comment.js";
+import { api } from "./apiClient.js"
+import { User } from "./models/user.js"
+import { Post } from "./models/post.js";
+import { Comment } from "./models/comment.js";
 
 const mainContainer = document.getElementById("main-content");
 
@@ -29,6 +29,26 @@ function main() {
     .catch((error) => {
       console.error("Error loading users:", error);
     });
+  
+  api.getPosts().then((response) => {
+    let id = 1;
+    response.posts.forEach((postData) => {
+      const post = new Post(
+        postData.id,
+        postData.title,
+        postData.body,
+        postData.tags,
+        postData.reactions,
+        null,
+        id,
+
+
+    )
+    id++;
+    posts.push(post);
+
+  });
+  })
 }
 
 function renderPosts(user) {
@@ -37,7 +57,7 @@ function renderPosts(user) {
 
   const postHeading = document.createElement("h3");
   postHeading.classList.add("post-heading");
-  postHeading.innerText = number;
+  postHeading.innerText = posts[].title;
   
 
   const postTopContainer = document.createElement("div");
