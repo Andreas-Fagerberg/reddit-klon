@@ -27,7 +27,6 @@ main > div{
   border: 1px solid rgb(142, 142, 142);
 }
 
-
 /* || General styles */
 body {
   margin: 0;
@@ -174,8 +173,8 @@ nav a {
 
   background-color: rgb(41, 39, 39);
   color: rgb(255, 255, 255);
-  padding-left:  0.7rem;
-  padding-right:  0.7rem;
+  padding-left: 0.7rem;
+  padding-right: 0.7rem;
   /* border: solid 1.5px rgb(98, 97, 97); */
   border: solid 2px rgb(159, 159, 159);
   /* box-shadow: 0.1rem 0.1rem 0.1rem rgba(21, 21, 21, 0.523); */
@@ -186,8 +185,8 @@ nav a {
 }
 
 .post-container > h3 {
- margin-top: 0.7rem;
- margin-bottom: 0.1rem;
+  margin-top: 0.7rem;
+  margin-bottom: 0.1rem;
 }
 
 .post-top-container {
@@ -210,15 +209,14 @@ nav a {
 }
 
 .tags-container {
-  display: flex; flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
   max-width: 60%;
   padding-bottom: 1rem;
   width: max-content;
-
 }
 
-.tags-container > div 
-{
+.tags-container > div {
   margin-top: 0.8rem;
   margin-right: 0.8rem;
   border-radius: 0.2rem;
