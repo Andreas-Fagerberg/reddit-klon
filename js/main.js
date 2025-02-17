@@ -1,7 +1,7 @@
-import { api } from "./apiClient.js";
-import { User } from "./user.js";
-import { Post } from "./post.js";
-import { Comment } from "./comment.js";
+import { api } from "./apiClient.js"
+import { User } from "./models/user.js"
+import { Post } from "./models/post.js";
+import { Comment } from "./models/comment.js";
 
 const mainContainer = document.getElementById("main-content");
 
