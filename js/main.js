@@ -140,7 +140,18 @@ function renderPosts(posts, users) {
     postContainer.append(postHeading);
     postContainer.append(postTopContainer);
     postTopContainer.append(postContent);
-    postContent.innerText = post.body;
+    
+    if (post.body.length > 60) {
+      const text = post.body.substring(0, 57)
+      if (text.endsWith(".") || text.endsWith(" ")) {
+        postContent.innerText = text.substring(0, 56) + "...";
+      }
+      else {
+        postContent.innerText = text + "...";
+      }
+    }
+     post.body.length > 60 ?  + "..." :  post.body;
+
     postContainer.append(postBottomContainer);
     postBottomContainer.append(tagsContainer);
     tags.forEach((tag) => {
@@ -149,10 +160,11 @@ function renderPosts(posts, users) {
 
     postBottomContainer.append(authorContainer);
     authorContainer.append(authorContent);
-    authorContent.innerText = user.username;
+    authorContent.innerText = users[post.id-1].username;
 
     number++;
   }
 }
+
 
 main();
