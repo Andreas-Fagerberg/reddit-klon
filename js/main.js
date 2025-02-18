@@ -1,5 +1,5 @@
-import { api } from "./apiClient.js"
-import { User } from "./models/user.js"
+import { api } from "./apiClient.js";
+import { User } from "./models/user.js";
 import { Post } from "./models/post.js";
 import { Comment } from "./models/comment.js";
 
@@ -10,8 +10,8 @@ const comments = [];
 let number = 1;
 
 async function main() {
-  const { users, comments, posts } = await api.getAllData();
-  console.log({ users, comments, posts });
+  const { posts, users, comments } = await api.getAllData();
+  console.log({ posts, users, comments });
   // saveDataLocalStorage("posts", users[1]);
   // api
   //   .getUsers()
@@ -71,9 +71,7 @@ function updatePost(id, reaction = null, comment = null) {
   saveDataLocalStorage("posts", posts);
 }
 
-function createComment() {
-
-}
+function createComment() {}
 
 function saveDataLocalStorage(key, data) {
   const dataCurrent = loadDataLocalStorage(key);
@@ -140,17 +138,16 @@ function renderPosts(posts, users) {
     postContainer.append(postHeading);
     postContainer.append(postTopContainer);
     postTopContainer.append(postContent);
-    
+
     if (post.body.length > 60) {
-      const text = post.body.substring(0, 57)
+      const text = post.body.substring(0, 57);
       if (text.endsWith(".") || text.endsWith(" ")) {
         postContent.innerText = text.substring(0, 56) + "...";
-      }
-      else {
+      } else {
         postContent.innerText = text + "...";
       }
     }
-     post.body.length > 60 ?  + "..." :  post.body;
+    post.body.length > 60 ? +"..." : post.body;
 
     postContainer.append(postBottomContainer);
     postBottomContainer.append(tagsContainer);
@@ -160,11 +157,13 @@ function renderPosts(posts, users) {
 
     postBottomContainer.append(authorContainer);
     authorContainer.append(authorContent);
-    authorContent.innerText = users[post.id-1].username;
+    const match = users.find((obj) => obj.id === post.userId);
+    if (match) {
+      authorContent.innerText = "user: " + match.username;
+    }
 
     number++;
   }
 }
-
 
 main();

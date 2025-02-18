@@ -28,9 +28,9 @@ class ApiClient {
       // Otherwise, use our standard data property extraction
       const processedData = customTransform
         ? customTransform(rawData)
-        : rawData[this.dataProperties[endpoint]];
+        : rawData[this.dataProperties[key]];
 
-      localStorage.setItem(key, JSON.stringify(processedData));
+      // localStorage.setItem(key, JSON.stringify(processedData));
       return processedData;
     } catch (error) {
       console.error(`Error fetching ${key}:`, error);
@@ -38,8 +38,12 @@ class ApiClient {
     }
   }
 
+  getPosts() {
+    return this.fetchData("posts", "posts/?limit=10");
+  }
+
   getUsers() {
-    return this.fetchData("users", "users", (data) =>
+    return this.fetchData("users", "users/?limit=0", (data) =>
       data.users.map((user) => ({
         id: user.id,
         username: user.username,
@@ -53,19 +57,18 @@ class ApiClient {
 // .then(res => res.json())
 // .then(console.log);
 
-  getPosts() {
-    return this.fetchData("posts", "posts");
-  }
+  
 
   getComments() {
-    return this.fetchData("comments", "comments");
+    return this.fetchData("comments", "comments/?limit=0");
   }
 
   async getAllData() {
-    const [users, comments, posts] = await Promise.all([
+    const [posts, users, comments] = await Promise.all([
+      this.getPosts(),
       this.getUsers(),
       this.getComments(),
-      this.getPosts(),
+      
     ]);
 
     return { users, comments, posts };
