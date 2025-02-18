@@ -30,7 +30,7 @@ class ApiClient {
         ? customTransform(rawData)
         : rawData[this.dataProperties[key]];
 
-      // localStorage.setItem(key, JSON.stringify(processedData));
+      localStorage.setItem(key, JSON.stringify(processedData));
       return processedData;
     } catch (error) {
       console.error(`Error fetching ${key}:`, error);
