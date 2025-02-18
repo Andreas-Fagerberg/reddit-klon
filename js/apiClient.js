@@ -47,6 +47,12 @@ class ApiClient {
     );
   }
   
+
+// /* getting posts by user with id 5 */
+// fetch('https://dummyjson.com/posts/user/5')
+// .then(res => res.json())
+// .then(console.log);
+
   getPosts() {
     return this.fetchData("posts", "posts");
   }
