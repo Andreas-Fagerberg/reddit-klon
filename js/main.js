@@ -161,8 +161,6 @@ function renderPosts(posts, users) {
     if (match) {
       authorContent.innerText = "user: " + match.username;
     }
-
-    number++;
   }
 }
 
