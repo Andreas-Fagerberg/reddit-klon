@@ -1,10 +1,13 @@
+import { dataFilterService } from "./dataFilterService.js";
+import { storageService } from "./storageService.js";
+
 class ApiClient {
   constructor() {
     this.BASE_URL = "https://dummyjson.com";
     this.dataProperties = {
-      users: "users",
       posts: "posts",
       comments: "comments",
+      users: "users",
     };
   }
 
@@ -30,7 +33,6 @@ class ApiClient {
         ? customTransform(rawData)
         : rawData[this.dataProperties[key]];
 
-      localStorage.setItem(key, JSON.stringify(processedData));
       return processedData;
     } catch (error) {
       console.error(`Error fetching ${key}:`, error);
@@ -50,28 +52,32 @@ class ApiClient {
       }))
     );
   }
-  
-
-// /* getting posts by user with id 5 */
-// fetch('https://dummyjson.com/posts/user/5')
-// .then(res => res.json())
-// .then(console.log);
-
-  
 
   getComments() {
     return this.fetchData("comments", "comments/?limit=0");
   }
 
   async getAllData() {
-    const [posts, users, comments] = await Promise.all([
+    const [posts, comments, users] = await Promise.all([
       this.getPosts(),
-      this.getUsers(),
       this.getComments(),
-      
+      this.getUsers(),
     ]);
 
-    return { users, comments, posts };
+    const filteredData = dataFilterService.filterRelevantData(
+      posts,
+      comments,
+      users
+    );
+
+    // Pass an array of objects with keys and values
+    storageService.saveData([
+      { key: "posts", value: filteredData.posts },
+      { key: "users", value: filteredData.users },
+      { key: "comments", value: filteredData.comments },
+    ]);
+
+    return filteredData;
   }
 }
 

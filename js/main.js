@@ -73,22 +73,7 @@ function updatePost(id, reaction = null, comment = null) {
 
 function createComment() {}
 
-function saveDataLocalStorage(key, data) {
-  const dataCurrent = loadDataLocalStorage(key);
-  dataCurrent.push(data);
-  console.log(dataCurrent);
-  localStorage.setItem(key, JSON.stringify(dataCurrent));
-}
 
-function loadDataLocalStorage(key) {
-  const loadedData = localStorage.getItem(key);
-
-  if (loadedData === null) {
-    return [];
-  }
-
-  return JSON.parse(loadedData);
-}
 // function createUser(usersData) {
 //   const tempUsers = usersData.users.map(userData =>
 //     new User(
