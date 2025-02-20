@@ -44,17 +44,12 @@ class ApiClient {
     return this.fetchData("posts", "posts/?limit=10");
   }
 
-  getUsers() {
-    return this.fetchData("users", "users/?limit=0", (data) =>
-      data.users.map((user) => ({
-        id: user.id,
-        username: user.username,
-      }))
-    );
-  }
-
   getComments() {
     return this.fetchData("comments", "comments/?limit=0");
+  }
+
+  getUsers() {
+    return this.fetchData("users", "users/?limit=0&select=id,username");
   }
 
   async getAllData() {
