@@ -89,6 +89,7 @@ function createComment() {}
 
 function renderPosts(posts, users) {
   for (const post of posts) {
+    const articleElement = document.createElement("article");
     const postContainer = document.createElement("div");
     postContainer.classList.add("post-container");
 
@@ -110,8 +111,6 @@ function renderPosts(posts, users) {
     const authorContainer = document.createElement("div");
     authorContainer.classList.add("author-container");
 
-    const authorContent = document.createElement("p");
-
     const tags = [];
     for (const tag of post.tags) {
       const tagElement = document.createElement("div");
@@ -119,7 +118,10 @@ function renderPosts(posts, users) {
       tags.push(tagElement);
     }
 
-    mainContainer.append(postContainer);
+    const authorContent = document.createElement("p");
+
+    mainContainer.append(articleElement);
+    articleElement.append(postContainer);
     postContainer.append(postHeading);
     postContainer.append(postTopContainer);
     postTopContainer.append(postContent);

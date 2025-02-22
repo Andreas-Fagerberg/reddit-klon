@@ -1,5 +1,6 @@
 /* || WIP styles. Mostly borders and such
 body {
+
   border: 2px solid yellow;
 }
 
@@ -29,6 +30,7 @@ main > div{
 
 /* || General styles */
 body {
+  background-color: rgb(11, 17, 25);
   margin: 0;
   padding: 0;
   font-family: Inter, Geneva, Verdana, sans-serif;
@@ -41,12 +43,11 @@ body {
 }
 
 header {
-  background-color: rgb(35, 34, 34);
   display: flex;
   width: 100vw;
   height: 5rem;
   align-items: center;
-  border-bottom: 0.02rem solid rgba(176, 176, 176, 0.879);
+  border-bottom: 0.02rem solid rgb(61, 71, 84);
   box-sizing: border-box;
 }
 
@@ -162,22 +163,29 @@ nav a {
 
 /* || Main styles */
 
+article {
+  width: 90%;
+  /* margin-bottom: rem; */
+  margin-top: 1.4rem;
+  padding-bottom: 1rem;
+  border-bottom: 0.01rem solid #ddd;  /* If you want a line between posts */
+}
+
 .post-container {
   display: flex;
   flex-direction: column;
-  width: 50%;
+  /* align-self: center; */
+  /* justify-self: center; */
+  width: 100%;
   height: fit-content;
-  overflow: hidden;
-  border-radius: 0.4rem;
-  margin-top: 2rem;
-
-  background-color: rgb(41, 39, 39);
+  /* margin-top: 2rem; */
   color: rgb(255, 255, 255);
-  padding-left: 0.7rem;
-  padding-right: 0.7rem;
-  /* border: solid 1.5px rgb(98, 97, 97); */
-  border: solid 2px rgb(159, 159, 159);
-  /* box-shadow: 0.1rem 0.1rem 0.1rem rgba(21, 21, 21, 0.523); */
+  /* padding: 1rem; */
+  border-radius: 1rem;
+}
+
+.post-container:hover {
+  background-color: rgb(26, 33, 42);
 }
 
 #post-heading {
@@ -185,6 +193,8 @@ nav a {
 }
 
 .post-container > h3 {
+  padding-left: 0.5rem;
+  /* padding-top: 0.5rem; */
   margin-top: 0.7rem;
   margin-bottom: 0.1rem;
 }
@@ -192,7 +202,8 @@ nav a {
 .post-top-container {
   display: flex;
   align-self: center;
-  width: 97%;
+  
+  width: 98%;
   border-top: 0.1rem solid grey;
   /* border-radius: 0.2rem; */
   margin-top: 1rem;
@@ -200,7 +211,7 @@ nav a {
 }
 
 .post-top-container > p {
-  padding: 0.7rem;
+  padding: 0.4rem;
 }
 
 .post-bottom-container {
@@ -213,6 +224,7 @@ nav a {
   flex-wrap: wrap;
   max-width: 60%;
   padding-bottom: 1rem;
+  padding-left: 0.5rem;
   width: max-content;
 }
 
@@ -231,7 +243,9 @@ nav a {
   width: 40%;
   justify-content: right;
   align-items: end;
+  padding-right: 0.5rem;
 }
+
 
 /* || Main styles non container */
 
@@ -242,8 +256,7 @@ main {
 }
 
 .sidebar {
-  background-color: rgba(238, 237, 237, 0.453);
-  width: 20%;
+  width: 25%;
 }
 
 #main-left-sidebar {
@@ -255,11 +268,10 @@ main {
 #main-content {
   display: flex;
   flex-direction: column;
-  width: 60%;
+  width: 50%;
   align-items: center;
-  background-color: rgb(255, 255, 255);
-  /* border-left: 0.001rem solid rgba(231, 231, 231, 0.819);
-  border-right: 0.001rem solid rgb(231, 231, 231); */
+  border-left: 0.001rem solid rgb(61, 71, 84);
+  border-right: 0.001rem solid rgb(61, 71, 84);
 }
 
 /* || Footer styles */
