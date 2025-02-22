@@ -47,7 +47,7 @@ header {
   width: 100vw;
   height: 5rem;
   align-items: center;
-  border-bottom: 0.02rem solid rgb(61, 71, 84);
+  border-bottom: 0.02rem solid rgb(39, 48, 59);
   box-sizing: border-box;
 }
 
@@ -164,11 +164,11 @@ nav a {
 /* || Main styles */
 
 article {
-  width: 90%;
+  width: 85%;
   /* margin-bottom: rem; */
   margin-top: 1.4rem;
   padding-bottom: 1rem;
-  border-bottom: 0.01rem solid #ddd;  /* If you want a line between posts */
+  border-bottom: 0.01rem solid rgb(51, 59, 69);;  /* If you want a line between posts */
 }
 
 .post-container {
@@ -204,14 +204,14 @@ article {
   align-self: center;
   
   width: 98%;
-  border-top: 0.1rem solid grey;
+  /* border-top: 0.1rem solid rgb(127, 130, 140); */
   /* border-radius: 0.2rem; */
-  margin-top: 1rem;
-  margin-bottom: 0.2rem;
+  /* margin-top: 1rem; */
+  margin-bottom: 0.9rem;
 }
 
 .post-top-container > p {
-  padding: 0.4rem;
+  /* padding-: 0.4rem; */
 }
 
 .post-bottom-container {
@@ -252,7 +252,7 @@ article {
 main {
   display: flex;
 
-  border-bottom: 0.02rem solid rgba(176, 176, 176, 0.163);
+  /* border-bottom: 0.02rem solid rgba(176, 176, 176, 0.163); */
 }
 
 .sidebar {
@@ -270,8 +270,8 @@ main {
   flex-direction: column;
   width: 50%;
   align-items: center;
-  border-left: 0.001rem solid rgb(61, 71, 84);
-  border-right: 0.001rem solid rgb(61, 71, 84);
+  border-left: 0.001rem solid rgb(39, 48, 59);
+  border-right: 0.001rem solid rgb(39, 48, 59);
 }
 
 /* || Footer styles */
