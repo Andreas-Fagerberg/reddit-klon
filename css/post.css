@@ -1,0 +1,346 @@
+/* || WIP styles. Mostly borders and such
+body {
+
+  border: 2px solid yellow;
+}
+
+#page-wrapper {
+  border: 2px solid pink;
+}
+
+nav {
+  border: 2px solid red;
+}
+
+#nav-links {
+  border: 2px solid rebeccapurple;
+}
+
+.nav-item {
+  border: 2px solid greenyellow;
+}
+
+main > div{
+  border: 1px solid skyblue;
+} 
+ */
+ .post-main-container {
+    border: 1px solid rgb(142, 142, 142);
+  }
+  
+  /* || General styles */
+  body {
+    background-color: rgb(11, 17, 25);
+    margin: 0;
+    padding: 0;
+    font-family: Inter, Geneva, Verdana, sans-serif;
+  }
+  
+  #page-wrapper {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  
+  header {
+    display: flex;
+    width: 100vw;
+    height: 5rem;
+    align-items: center;
+    border-bottom: 0.02rem solid rgb(39, 48, 59);
+    box-sizing: border-box;
+  }
+  
+  /* || Nav styles */
+  nav {
+    display: flex;
+    width: 100%;
+    height: 2.2rem;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
+    box-sizing: border-box;
+  }
+  
+  nav a {
+    display: contents;
+  }
+  
+  #nav-logo-container {
+    flex: 1;
+  }
+  
+  #nav-search-container {
+    display: flex;
+    margin: 0 auto;
+    width: 27rem;
+    border-radius: 2rem;
+    overflow: hidden;
+    /* max-width: 50%; */
+    /* height: 2.2rem; */
+  }
+  
+  #nav-create-post-container {
+    display: flex;
+    justify-content: flex-end;
+    text-align: center;
+    flex: 1;
+    margin-left: auto;
+    align-items: center;
+    /* white-space: nowrap; */
+  }
+  
+  #nav-create-post-container,
+  #nav-search-container {
+    height: 100%;
+    box-sizing: border-box;
+  }
+  
+  /* || Nav styles non containers */
+  
+  #logo-image {
+    width: 13rem;
+    margin-top: 0.24rem;
+    margin-left: 1rem;
+  }
+  
+  #nav-search-field {
+    width: 75%;
+    height: 100%;
+    box-sizing: border-box;
+    padding-left: 1.1rem;
+    outline: none;
+    background-color: rgb(226, 226, 226);
+    border: none;
+    font-size: 0.9rem;
+    border-right: 0.05rem solid;
+  }
+  
+  #nav-search-field::placeholder {
+    color: rgb(117, 114, 114);
+  }
+  
+  #nav-search-field:hover {
+    background-color: rgb(219, 217, 217);
+  }
+  
+  #nav-search-field:hover::placeholder {
+    color: rgb(68, 68, 68);
+  }
+  
+  #nav-search-button,
+  #nav-create-post-button {
+    height: 100%;
+    box-sizing: border-box;
+    border: none;
+    background-color: rgb(196, 194, 194);
+    color: rgb(57, 57, 57);
+    font-size: 0.9rem;
+  }
+  
+  #nav-create-post-button {
+    display: flex;
+    width: 8rem;
+    border-radius: 2rem;
+    overflow: hidden;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.8rem;
+  }
+  
+  #nav-search-button {
+    width: 25%;
+  
+    box-sizing: border-box;
+  
+  }
+  
+  #nav-search-button:hover,
+  #nav-create-post-button:hover {
+    background-color: rgb(210, 209, 209);
+    color: rgb(51, 51, 51);
+  }
+  
+  /* || Main styles */
+  
+  article {
+    width: 85%;
+    /* margin-bottom: rem; */
+    color: rgb(255, 255, 255);
+  
+    margin-top: 1.4rem;
+    padding-bottom: 1rem;
+    border-bottom: 0.01rem solid rgb(51, 59, 69);
+    cursor: pointer;
+  }
+  
+  .post-container {
+    display: flex;
+    flex-direction: column;
+    /* align-self: center; */
+    /* justify-self: center; */
+    width: 100%;
+    height: fit-content;
+    /* margin-top: 2rem; */
+    /* padding: 1rem; */
+    border-radius: 1rem;
+  }
+ 
+  
+  #post-heading {
+    /* padding-top: 0.3rem; */
+  }
+  
+  .post-container > h3 {
+    padding-left: 0.5rem;
+    /* padding-top: 0.5rem; */
+    margin-top: 0.7rem;
+    margin-bottom: 0.1rem;
+  }
+  
+  .post-top-container {
+    display: flex;
+    align-self: center;
+  
+    width: 98%;
+    /* border-top: 0.1rem solid rgb(127, 130, 140); */
+    /* border-radius: 0.2rem; */
+    /* margin-top: 1rem; */
+    margin-bottom: 0.9rem;
+  }
+  
+  .post-top-container > p {
+    /* padding-: 0.4rem; */
+  }
+  
+  .post-bottom-container {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 60%;
+    padding-bottom: 1rem;
+    padding-left: 0.5rem;
+    width: max-content;
+    cursor: default;
+  }
+  
+  .tags-container > div {
+    margin-top: 0.8rem;
+    margin-right: 0.8rem;
+    border-radius: 0.2rem;
+    background-color: rgb(65, 66, 71);
+    padding: 0.2rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+  }
+  
+  .tags-container > div:hover {
+    background-color: rgb(138, 134, 134);
+  }
+  
+  .author-container {
+    display: flex;
+    width: 40%;
+    justify-content: right;
+    align-items: end;
+    padding-right: 0.5rem;
+  }
+  
+  .reactions-container {
+    display: flex;
+    width: fit-content;
+    margin-bottom: 0.3rem;
+    margin-left: 2rem;
+    margin-top: 0.6rem;
+    border-radius: 2rem;
+    overflow: hidden;
+    align-items: stretch;
+    background-color: rgb(44, 45, 50);
+   
+  }
+  
+  .upvote-button:before,
+  .downvote-button:before {
+    display: flex;
+    align-items: center;
+  }
+  
+  .upvote-button,
+  .downvote-button {
+    background-color: inherit;
+    border: none;
+    font-size: 0.9rem;
+    display: flex; /* Add this */
+    align-items: center; /* Add this */
+    cursor: pointer; /* For better UX */
+    
+    /* box-sizing: border-box; */
+    /* padding: 0.7rem; */
+  }
+  
+  .upvote-button {
+    color: rgb(153, 255, 0);
+    padding: 0.7rem 0.4rem 0.7rem 0.7rem; /* Full vertical padding */
+  }
+  .downvote-button {
+    color: rgb(242, 43, 43);
+    padding: 0.7rem 0.7rem 0.7rem 0.4rem; /* Full vertical padding */
+  }
+  .reaction-counter {
+    margin: 0;
+    padding: 0.7rem 0.3rem;
+    color: rgb(242, 43, 43);
+    display: flex;
+    align-items: center;
+    cursor: text;
+  }
+  
+  .upvote-button:hover,
+  .downvote-button:hover {
+    background-color: rgb(70, 72, 79);
+  }
+  
+  
+  /* || Main styles non container */
+  
+  main {
+    display: flex;
+  
+    /* border-bottom: 0.02rem solid rgba(176, 176, 176, 0.163); */
+  }
+  
+  .sidebar {
+    width: 25%;
+  }
+  
+  #main-left-sidebar {
+  }
+  
+  #main-right-sidebar {
+  }
+  
+  #main-content {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    align-items: center;
+    /* border-left: 0.001rem solid rgb(39, 48, 59); */
+    /* border-right: 0.001rem solid rgb(39, 48, 59); */
+  }
+  
+  /* || Footer styles */
+  
+  footer {
+    color: rgb(255, 255, 255);
+    display: flex;
+    /* margin: 1rem; */
+    height: fit-content;
+    padding: 0.9rem;
+    /* border-top: 0.01rem solid rgb(51, 59, 69); */
+  }
+  

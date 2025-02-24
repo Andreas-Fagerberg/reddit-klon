@@ -85,9 +85,18 @@ function renderPosts(posts, users) {
     const authorContent = document.createElement("p");
 
     const reactionsContainer = document.createElement("div");
-
+    reactionsContainer.classList.add("reactions-container");
     const upvoteButton = document.createElement("button");
+    upvoteButton.classList.add("upvote-button");
+    upvoteButton.classList.add("fa", "fa-thumbs-o-up");
+
+    const reactionCounter = document.createElement("p");
+    reactionCounter.classList.add("reaction-counter");
     const downvoteButton = document.createElement("button");
+
+
+    downvoteButton.classList.add("downvote-button");
+    downvoteButton.classList.add("fa", "fa-thumbs-o-down");
 
 
     mainContainer.append(articleElement);
@@ -118,6 +127,22 @@ function renderPosts(posts, users) {
     if (match) {
       authorContent.innerText = "user: " + match.username;
     }
+
+    postContainer.append(reactionsContainer);
+    reactionsContainer.append(upvoteButton);
+    reactionsContainer.append(reactionCounter);
+    reactionsContainer.append(downvoteButton);
+    // upvoteButton.innerText = "fa fa-thumbs-o-up"
+    const reactions = post.reactions.likes - post.reactions.dislikes;
+    if (reactions < 0) {
+      reactionCounter.style.color = "rgb(242, 43, 43)";
+    }
+    else {
+      reactionCounter.style.color = "rgb(153, 255, 0)"
+    }
+    reactionCounter.innerText = reactions;
+
+    
   }
 }
 

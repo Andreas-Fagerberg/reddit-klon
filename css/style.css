@@ -150,9 +150,9 @@ nav a {
 
 #nav-search-button {
   width: 25%;
-  height: 100%;
+
   box-sizing: border-box;
-  padding: 0 1rem;
+
 }
 
 #nav-search-button:hover,
@@ -166,6 +166,8 @@ nav a {
 article {
   width: 85%;
   /* margin-bottom: rem; */
+  color: rgb(255, 255, 255);
+
   margin-top: 1.4rem;
   padding-bottom: 1rem;
   border-bottom: 0.01rem solid rgb(51, 59, 69);
@@ -180,7 +182,6 @@ article {
   width: 100%;
   height: fit-content;
   /* margin-top: 2rem; */
-  color: rgb(255, 255, 255);
   /* padding: 1rem; */
   border-radius: 1rem;
 }
@@ -203,7 +204,7 @@ article {
 .post-top-container {
   display: flex;
   align-self: center;
-  
+
   width: 98%;
   /* border-top: 0.1rem solid rgb(127, 130, 140); */
   /* border-radius: 0.2rem; */
@@ -211,9 +212,8 @@ article {
   margin-bottom: 0.9rem;
 }
 
-#main-content article:last-child {  
+#main-content article:last-child {
   border-bottom: none;
-
 }
 .post-top-container > p {
   /* padding-: 0.4rem; */
@@ -255,6 +255,60 @@ article {
   justify-content: right;
   align-items: end;
   padding-right: 0.5rem;
+}
+
+.reactions-container {
+  display: flex;
+  width: fit-content;
+  margin-bottom: 0.3rem;
+  margin-left: 2rem;
+  margin-top: 0.6rem;
+  border-radius: 2rem;
+  overflow: hidden;
+  align-items: stretch;
+  background-color: rgb(44, 45, 50);
+ 
+}
+
+.upvote-button:before,
+.downvote-button:before {
+  display: flex;
+  align-items: center;
+}
+
+.upvote-button,
+.downvote-button {
+  background-color: inherit;
+  border: none;
+  font-size: 0.9rem;
+  display: flex; /* Add this */
+  align-items: center; /* Add this */
+  cursor: pointer; /* For better UX */
+  
+  /* box-sizing: border-box; */
+  /* padding: 0.7rem; */
+}
+
+.upvote-button {
+  color: rgb(153, 255, 0);
+  padding: 0.7rem 0.4rem 0.7rem 0.7rem; /* Full vertical padding */
+}
+.downvote-button {
+  color: rgb(242, 43, 43);
+  padding: 0.7rem 0.7rem 0.7rem 0.4rem; /* Full vertical padding */
+}
+.reaction-counter {
+  margin: 0;
+  padding: 0.7rem 0.3rem;
+  color: rgb(242, 43, 43);
+  display: flex;
+  align-items: center;
+  cursor: text;
+}
+
+.upvote-button:hover,
+.downvote-button:hover {
+  background-color: rgb(70, 72, 79);
 }
 
 
