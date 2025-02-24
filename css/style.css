@@ -168,7 +168,7 @@ article {
   /* margin-bottom: rem; */
   margin-top: 1.4rem;
   padding-bottom: 1rem;
-  border-bottom: 0.01rem solid rgb(51, 59, 69);;  /* If you want a line between posts */
+  border-bottom: 0.01rem solid rgb(51, 59, 69);
 }
 
 .post-container {
@@ -210,6 +210,15 @@ article {
   margin-bottom: 0.9rem;
 }
 
+#main-content article:last-child {
+  width: 85%;
+  /* margin-bottom: rem; */
+  margin-top: 1.4rem;
+  padding-bottom: 1rem;
+  
+  border-bottom: none;
+
+}
 .post-top-container > p {
   /* padding-: 0.4rem; */
 }
@@ -277,6 +286,10 @@ main {
 /* || Footer styles */
 
 footer {
+  color: rgb(255, 255, 255);
   display: flex;
-  margin: 1rem;
+  /* margin: 1rem; */
+  height: fit-content;
+  padding: 0.9rem;
+  border-top: 0.01rem solid rgb(51, 59, 69);
 }
