@@ -44,12 +44,22 @@ function renderPosts(posts, users) {
   for (const post of posts) {
     const articleElement = document.createElement("article");
     articleElement.setAttribute("data-post-id", post.id);
+    articleElement.setAttribute("role", "link");
+    articleElement.addEventListener("click", (event) => {
+      if (event.target.closest(".tags-container") || event.target.closest(".author-container")) {
+        return;
+      }
+      // data-post-id gets converted to camelCase when it is accessd by dataset which means: data-post-id => postId. 
+      // So we point to postId here in order to access the correct dataset.
+      const postId = event.currentTarget.dataset.postId
+      window.location.href = `post.html?id=${postId}`;
+    })
     const postContainer = document.createElement("div");
     postContainer.classList.add("post-container");
 
     const postHeading = document.createElement("h3");
     postHeading.classList.add("post-heading");
-    postHeading.innerText = post.title;
+    postHeading.innerText = post.title; 
 
     const postTopContainer = document.createElement("div");
     postTopContainer.classList.add("post-top-container");
