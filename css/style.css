@@ -210,12 +210,7 @@ article {
   margin-bottom: 0.9rem;
 }
 
-#main-content article:last-child {
-  width: 85%;
-  /* margin-bottom: rem; */
-  margin-top: 1.4rem;
-  padding-bottom: 1rem;
-  
+#main-content article:last-child {  
   border-bottom: none;
 
 }

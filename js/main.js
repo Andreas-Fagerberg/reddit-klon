@@ -12,39 +12,6 @@ let number = 1;
 async function main() {
   const { posts, users, comments } = await api.getAllData();
   console.log({ posts, users, comments });
-  // saveDataLocalStorage("posts", users[1]);
-  // api
-  //   .getUsers()
-  //   .then((response) => {
-  //     response.users.forEach((userData) => {
-  //       const user = new User(userData.id, userData.username);
-  //       console.log(user);
-  //       users.push(user);
-  //     });
-  //     localStorage.setItem("users", JSON.stringify(users));
-  //   })
-  //   .catch((error) => {
-  //     console.error("Error loading users:", error);
-  //   });
-  // api.getPosts().then((response) => {
-  //   let index = 0;
-  //   response.posts.forEach((postData) => {
-  //     const post = new Post(
-  //       postData.id,
-  //       postData.title,
-  //       postData.body,
-  //       postData.tags,
-  //       postData.reactions,
-  //       postData.comments,
-  //       users[index].id
-  //     );
-  //     posts.push(post);
-  //   });
-  // });
-
-  // for (let post of posts) {
-  //   renderPosts();
-  // }
   renderPosts(posts, users);
 }
 
@@ -73,23 +40,10 @@ function updatePost(id, reaction = null, comment = null) {
 
 function createComment() {}
 
-
-// function createUser(usersData) {
-//   const tempUsers = usersData.users.map(userData =>
-//     new User(
-//       userData.id,
-//       userData.username
-//     )
-//   );
-//   console.log(tempUsers);
-//   return tempUsers;
-// }
-
-// saveUser()
-
 function renderPosts(posts, users) {
   for (const post of posts) {
     const articleElement = document.createElement("article");
+    articleElement.setAttribute("data-post-id", post.id);
     const postContainer = document.createElement("div");
     postContainer.classList.add("post-container");
 
@@ -119,6 +73,12 @@ function renderPosts(posts, users) {
     }
 
     const authorContent = document.createElement("p");
+
+    const reactionsContainer = document.createElement("div");
+
+    const upvoteButton = document.createElement("button");
+    const downvoteButton = document.createElement("button");
+
 
     mainContainer.append(articleElement);
     articleElement.append(postContainer);
