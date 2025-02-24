@@ -1,11 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/style.css" />
+    <script type="module" src="/js/apiClient.js"></script>
+    <script type="module" src="/js/post.js"></script>
+    <script type="module" src="/js/models/user.js"></script>
+    <script type="module" src="/js/models/comment.js"></script>
+    <script type="module" src="/js/models/post.js"></script>
     <title>Document</title>
-</head>
-<body>
-    <p>HELO THeR Mr KEnBobi</p>
-</body>
+  </head>
+  <body>
+    <div id="page-wrapper">
+      <header>
+        <nav>
+          <div id="nav-logo-container">
+            <a href="index.html">
+              <img
+                id="logo-image"
+                src="/images/mini-reddit-clone-img-svg-version.svg"
+                alt="REDDIT?"
+              />
+            </a>
+          </div>
+          <div id="nav-search-container">
+            <input
+              id="nav-search-field"
+              type="text"
+              placeholder="Search Post"
+            />
+            <button id="nav-search-button">Search</button>
+          </div>
+          <div id="nav-create-post-container">
+            <button id="nav-create-post-button">
+              <svg
+                rpl=""
+                fill="currentColor"
+                height="20"
+                icon-name="add-outline"
+                viewBox="0 0 20 20"
+                width="20"
+                xmlns="http://www.w3.org//s2000vg"
+              >
+                <path
+                  d="M19 9.375h-8.375V1h-1.25v8.375H1v1.25h8.375V19h1.25v-8.375H19v-1.25Z"
+                ></path>
+              </svg>
+              Create post
+            </button>
+          </div>
+        </nav>
+      </header>
+      <main>
+        <div class="sidebar" id="main-left-sidebar">A</div>
+        <div id="main-content">
+          <!-- <div class="post-container">
+            <h3 class="post-heading">TITLE</h3>
+            <div class="post-top-container">
+              <p>
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                Pariatur similique assumenda rem, maiores ducimus earum ipsa
+                aliquam ipsum id eos nam exercitationem veniam maxime sit
+                reprehenderit. Eius velit iusto quas!
+              </p>
+            </div>
+            <div class="post-bottom-container">
+              <div class="tags-container">
+                <div>tags</div>
+                <div>go</div>
+                <div>here</div>
+                <div>tags</div>
+                <div>go</div>
+                <div>here</div>
+                <div>tags</div>
+                <div>go</div>
+                <div>here</div>
+                <div>here</div>
+              </div>
+              <div class="author-container">
+                <p>Author name goes here.</p>
+              </div>
+            </div>
+          </div> -->
+        </div>
+        <div class="sidebar" id="main-right-sidebar">C</div>
+      </main>
+      <footer>Created by:</footer>
+    </div>
+  </body>
 </html>
