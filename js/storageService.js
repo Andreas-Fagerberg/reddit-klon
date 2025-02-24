@@ -16,10 +16,3 @@ class StorageService {
 }
 
 export const storageService = new StorageService();
-
-// function (key, data) {
-//     const dataCurrent = loadDataLocalStorage(key);
-//     dataCurrent.push(data);
-//     console.log(dataCurrent);
-//     localStorage.setItem(key, JSON.stringify(dataCurrent));
-//   }
