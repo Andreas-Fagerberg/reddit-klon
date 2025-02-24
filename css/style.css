@@ -169,6 +169,7 @@ article {
   margin-top: 1.4rem;
   padding-bottom: 1rem;
   border-bottom: 0.01rem solid rgb(51, 59, 69);
+  cursor: pointer;
 }
 
 .post-container {
@@ -230,16 +231,22 @@ article {
   padding-bottom: 1rem;
   padding-left: 0.5rem;
   width: max-content;
+  cursor: default;
 }
 
 .tags-container > div {
   margin-top: 0.8rem;
   margin-right: 0.8rem;
   border-radius: 0.2rem;
-  background-color: rgb(135, 135, 135);
+  background-color: rgb(65, 66, 71);
   padding: 0.2rem;
   font-weight: 600;
   font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.tags-container > div:hover {
+  background-color: rgb(138, 134, 134);
 }
 
 .author-container {
