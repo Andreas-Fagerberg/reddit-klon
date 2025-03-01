@@ -13,7 +13,6 @@ document.addEventListener("DOMContentLoaded", () => {
   renderPost(post);
 });
 
-// Render post.
 function renderPost(post) {
   const mainContainer = document.getElementById("main-content");
   mainContainer.innerHTML = "";
@@ -135,9 +134,4 @@ function renderPost(post) {
     reactionCounter.style.color = "rgb(153, 255, 0)";
   }
   reactionCounter.innerText = reactions;
-}
-
-function updateReaction() {
-  post.reactions;
-  storageService.saveData();
 }
