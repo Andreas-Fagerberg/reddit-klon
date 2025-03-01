@@ -295,6 +295,7 @@ main > div{
     padding: 0.7rem 0.7rem 0.7rem 0.4rem; /* Full vertical padding */
   }
   .reaction-counter {
+    font-variant-numeric: tabular-nums;
     margin: 0;
     padding: 0.7rem 0.3rem;
     color: rgb(242, 43, 43);
