@@ -1,9 +1,5 @@
 import { storageService } from "./storageService.js";
 
-const mainContainer = document.getElementById("main-content");
-
-
-
 // Get post from localstorage with urlparam post id
 document.addEventListener("DOMContentLoaded", () => {
   // Create a URLSearchParams object from the current URL
@@ -17,12 +13,13 @@ document.addEventListener("DOMContentLoaded", () => {
   renderPost(post);
 });
 
-
 // Render post.
 function renderPost(post) {
+  const mainContainer = document.getElementById("main-content");
+  mainContainer.innerHTML = "";
   const articleElement = document.createElement("article");
   const users = storageService.loadData("users");
-  
+
   articleElement.setAttribute("data-post-id", post.id); // stores the post id in the data-post-id attribute.
   articleElement.setAttribute("role", "link");
   articleElement.addEventListener("click", (event) => {
@@ -106,9 +103,29 @@ function renderPost(post) {
   reactionsContainer.append(reactionCounter);
   reactionsContainer.append(downvoteButton);
 
-  upvoteButton.addEventListener('click')
+  upvoteButton.addEventListener("click", () => {
+    // Update the post and get the updated version
+    const updatedPost = storageService.updateArrayItem(
+      "posts",
+      post.id,
+      (item) => {
+        item.reactions.likes++;
+      }
+    );
 
+    renderPost(updatedPost);
+  });
 
+  downvoteButton.addEventListener("click", () => {
+    const updatedPost = storageService.updateArrayItem(
+      "posts",
+      post.id,
+      (item) => {
+        item.reactions.dislikes++;
+      }
+    );
+    renderPost(updatedPost);
+  });
 
   // upvoteButton.innerText = "fa fa-thumbs-o-up"
   const reactions = post.reactions.likes - post.reactions.dislikes;
@@ -120,7 +137,7 @@ function renderPost(post) {
   reactionCounter.innerText = reactions;
 }
 
-function updateReaction(){
-  post.reactions
-  storageService.saveData()
+function updateReaction() {
+  post.reactions;
+  storageService.saveData();
 }

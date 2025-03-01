@@ -1,46 +1,17 @@
 import { api } from "./apiClient.js";
-import { User } from "./models/user.js";
-import { Post } from "./models/post.js";
-import { Comment } from "./models/comment.js";
-
-const mainContainer = document.getElementById("main-content");
-
-const comments = [];
-
-let number = 1;
+import { storageService } from "./storageService.js";
 
 async function main() {
   const { posts, users, comments } = await api.getAllData();
   console.log({ posts, users, comments });
-  renderPosts(posts, users);
+  renderPosts();
 }
 
-function createPost(title, body, tags, userId) {
-  const posts = loadDataLocalStorage("posts");
-  const post = new Post(
-    posts.length,
-    title,
-    body,
-    tags,
-    { likes: 0, dislikes: 0 },
-    [],
-    userId
-  );
-
-  saveDataLocalStorage("posts", posts);
-}
-
-function updatePost(id, reaction = null, comment = null) {
-  const posts = loadDataLocalStorage("posts");
-  const post = posts[id];
-
-  // TODO: Update post based on if reaction or comment is null.
-  saveDataLocalStorage("posts", posts);
-}
-
-function createComment() {}
-
-function renderPosts(posts, users) {
+function renderPosts() {
+  const mainContainer = document.getElementById("main-content");
+  mainContainer.innerHTML = "";
+  const posts = storageService.loadData("posts");
+  const users = storageService.loadData("users");
   for (const post of posts) {
     const articleElement = document.createElement("article");
     articleElement.setAttribute("data-post-id", post.id);
@@ -53,17 +24,17 @@ function renderPosts(posts, users) {
       ) {
         return;
       }
-      // data-post-id gets converted to camelCase when it is accessd by dataset which means: data-post-id => postId. 
+      // data-post-id gets converted to camelCase when it is accessd by dataset which means: data-post-id => postId.
       // So we point to postId here in order to access the correct dataset.
-      const postId = event.currentTarget.dataset.postId
+      const postId = event.currentTarget.dataset.postId;
       window.location.href = `post.html?id=${postId}`;
-    })
+    });
     const postContainer = document.createElement("div");
     postContainer.classList.add("post-container");
 
     const postHeading = document.createElement("h3");
     postHeading.classList.add("post-heading");
-    postHeading.innerText = post.title; 
+    postHeading.innerText = post.title;
 
     const postTopContainer = document.createElement("div");
     postTopContainer.classList.add("post-top-container");
@@ -98,10 +69,8 @@ function renderPosts(posts, users) {
     reactionCounter.classList.add("reaction-counter");
     const downvoteButton = document.createElement("button");
 
-
     downvoteButton.classList.add("downvote-button");
     downvoteButton.classList.add("fa", "fa-thumbs-o-down");
-
 
     mainContainer.append(articleElement);
     articleElement.append(postContainer);
@@ -136,17 +105,38 @@ function renderPosts(posts, users) {
     reactionsContainer.append(upvoteButton);
     reactionsContainer.append(reactionCounter);
     reactionsContainer.append(downvoteButton);
+
+    upvoteButton.addEventListener("click", () => {
+      // Update the post and get the updated version
+      const updatedPost = storageService.updateArrayItem(
+        "posts",
+        post.id,
+        (item) => {
+          item.reactions.likes++;
+        }
+      );
+
+      renderPosts();
+    });
+
+    downvoteButton.addEventListener("click", () => {
+      const updatedPost = storageService.updateArrayItem(
+        "posts",
+        post.id,
+        (item) => {
+          item.reactions.dislikes++;
+        }
+      );
+      renderPosts();
+    });
     // upvoteButton.innerText = "fa fa-thumbs-o-up"
     const reactions = post.reactions.likes - post.reactions.dislikes;
     if (reactions < 0) {
       reactionCounter.style.color = "rgb(242, 43, 43)";
-    }
-    else {
-      reactionCounter.style.color = "rgb(153, 255, 0)"
+    } else {
+      reactionCounter.style.color = "rgb(153, 255, 0)";
     }
     reactionCounter.innerText = reactions;
-
-    
   }
 }
 

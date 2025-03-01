@@ -66,7 +66,7 @@ class ApiClient {
     );
 
     // Pass an array of objects with keys and values
-    storageService.saveData([
+    storageService.saveCollection([
       { key: "posts", value: filteredData.posts },
       { key: "users", value: filteredData.users },
       { key: "comments", value: filteredData.comments },
