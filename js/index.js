@@ -46,7 +46,11 @@ function renderPosts(posts, users) {
     articleElement.setAttribute("data-post-id", post.id);
     articleElement.setAttribute("role", "link");
     articleElement.addEventListener("click", (event) => {
-      if (event.target.closest(".tags-container") || event.target.closest(".author-container")) {
+      if (
+        event.target.closest(".tags-container") ||
+        event.target.closest(".author-container") ||
+        event.target.closest(".reactions-container")
+      ) {
         return;
       }
       // data-post-id gets converted to camelCase when it is accessd by dataset which means: data-post-id => postId. 

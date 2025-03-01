@@ -1,8 +1,8 @@
 import { storageService } from "./storageService.js";
 
 const mainContainer = document.getElementById("main-content");
-// TODO: Get comments and user from localStorage.
-// TODO: Render post.
+
+
 
 // Get post from localstorage with urlparam post id
 document.addEventListener("DOMContentLoaded", () => {
@@ -17,15 +17,19 @@ document.addEventListener("DOMContentLoaded", () => {
   renderPost(post);
 });
 
+
+// Render post.
 function renderPost(post) {
   const articleElement = document.createElement("article");
   const users = storageService.loadData("users");
-  articleElement.setAttribute("data-post-id", post.id);
+  
+  articleElement.setAttribute("data-post-id", post.id); // stores the post id in the data-post-id attribute.
   articleElement.setAttribute("role", "link");
   articleElement.addEventListener("click", (event) => {
     if (
       event.target.closest(".tags-container") ||
-      event.target.closest(".author-container")
+      event.target.closest(".author-container") ||
+      event.target.closest(".reactions-container")
     ) {
       return;
     }
@@ -101,6 +105,11 @@ function renderPost(post) {
   reactionsContainer.append(upvoteButton);
   reactionsContainer.append(reactionCounter);
   reactionsContainer.append(downvoteButton);
+
+  upvoteButton.addEventListener('click')
+
+
+
   // upvoteButton.innerText = "fa fa-thumbs-o-up"
   const reactions = post.reactions.likes - post.reactions.dislikes;
   if (reactions < 0) {
@@ -109,4 +118,9 @@ function renderPost(post) {
     reactionCounter.style.color = "rgb(153, 255, 0)";
   }
   reactionCounter.innerText = reactions;
+}
+
+function updateReaction(){
+  post.reactions
+  storageService.saveData()
 }
