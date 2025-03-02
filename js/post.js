@@ -18,22 +18,8 @@ function renderPost(post) {
   mainContainer.innerHTML = "";
   const articleElement = document.createElement("article");
   const users = storageService.loadData("users");
+  const comments = storageService.loadData("comments");
 
-  articleElement.setAttribute("data-post-id", post.id); // stores the post id in the data-post-id attribute.
-  articleElement.setAttribute("role", "link");
-  articleElement.addEventListener("click", (event) => {
-    if (
-      event.target.closest(".tags-container") ||
-      event.target.closest(".author-container") ||
-      event.target.closest(".reactions-container")
-    ) {
-      return;
-    }
-    // data-post-id gets converted to camelCase when it is accessd by dataset which means: data-post-id => postId.
-    // So we point to postId here in order to access the correct dataset.
-    const postId = event.currentTarget.dataset.postId;
-    window.location.href = `post.html?id=${postId}`;
-  });
   const postContainer = document.createElement("div");
   postContainer.classList.add("post-container");
 
@@ -66,6 +52,7 @@ function renderPost(post) {
 
   const reactionsContainer = document.createElement("div");
   reactionsContainer.classList.add("reactions-container");
+
   const upvoteButton = document.createElement("button");
   upvoteButton.classList.add("upvote-button");
   upvoteButton.classList.add("fa", "fa-thumbs-o-up");
@@ -76,6 +63,40 @@ function renderPost(post) {
 
   downvoteButton.classList.add("downvote-button");
   downvoteButton.classList.add("fa", "fa-thumbs-o-down");
+
+  
+  const createCommentContainer = document.createElement("div")
+  createCommentContainer.classList.add("create-comment-container");
+
+  const commentTextArea = document.createElement("textarea");
+  commentTextArea.classList.add("comment-text-area");
+  commentTextArea.setAttribute("placeholder", "Create comment");
+
+  const createCommentBottomContainer = document.createElement("div");
+  createCommentBottomContainer.classList.add("create-comment-bottom-container");
+
+  const commentSelectUser = document.createElement("select");
+  commentSelectUser.classList.add("comment-select-user");
+  commentSelectUser.name = "users";
+
+  const commentSelectUserLabel = document.createElement("label");
+  commentSelectUserLabel.classList.add("comment-select-user-label");
+  commentSelectUserLabel.for = "users";
+  commentSelectUserLabel.innerText = "Select a user:";
+
+
+  for (let user of users){
+    const option = document.createElement("option");
+    option.value = user.username;
+    option.innerText = user.username;
+    commentSelectUser.append(option);
+  }
+
+
+  const createCommentButton = document.createElement("button");
+  createCommentButton.classList.add("create-comment-button");
+  createCommentButton.innerText = "Comment"
+
 
   mainContainer.append(articleElement);
   articleElement.append(postContainer);
@@ -90,6 +111,7 @@ function renderPost(post) {
     tagsContainer.append(tag);
   });
 
+
   postBottomContainer.append(authorContainer);
   authorContainer.append(authorContent);
   const match = users.find((obj) => obj.id === post.userId);
@@ -97,10 +119,21 @@ function renderPost(post) {
     authorContent.innerText = "user: " + match.username;
   }
 
+
   postContainer.append(reactionsContainer);
   reactionsContainer.append(upvoteButton);
   reactionsContainer.append(reactionCounter);
   reactionsContainer.append(downvoteButton);
+
+  mainContainer.append(createCommentContainer);
+  createCommentContainer.append(commentTextArea);
+  createCommentContainer.append(createCommentBottomContainer);
+  createCommentBottomContainer.append(commentSelectUserLabel);
+  createCommentBottomContainer.append(commentSelectUser);
+  createCommentBottomContainer.append(createCommentButton);
+
+
+
 
   upvoteButton.addEventListener("click", () => {
     // Update the post and get the updated version
