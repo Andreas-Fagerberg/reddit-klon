@@ -423,9 +423,7 @@ article {
 
 main {
   display: flex;
-  /* height: 100%; */
 
-  /* border-bottom: 0.02rem solid rgba(176, 176, 176, 0.163); */
 }
 
 .sidebar {
@@ -444,8 +442,6 @@ main {
   width: 50%;
 
   align-items: center;
-  /* border-left: 0.001rem solid rgb(39, 48, 59); */
-  /* border-right: 0.001rem solid rgb(39, 48, 59); */
 }
 
 /* || Footer styles */
