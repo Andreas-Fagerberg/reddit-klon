@@ -12,6 +12,7 @@ class DataFilterService {
     const commentUserIds = [
       ...new Set(matchingComments.map((comment) => comment.userId)),
     ];
+
     const allRelevantUserIds = [
       ...new Set([...uniqueUserIds, ...commentUserIds]),
     ];
@@ -20,6 +21,11 @@ class DataFilterService {
     const matchingUsers = users.filter((user) =>
       allRelevantUserIds.includes(user.id)
     );
+    for (let comment of comments) {
+      delete comment.user.fullName;
+      delete comment.likes;
+    }
+    
     return { posts, users: matchingUsers, comments: matchingComments };
   }
 }

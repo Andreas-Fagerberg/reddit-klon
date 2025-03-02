@@ -18,7 +18,9 @@ class StorageService {
 
   // Save a single key-value pair
   saveData(key, value) {
-    localStorage.setItem(key, JSON.stringify(value));
+    const storedData = this.loadData(key);
+    storedData.push(value);
+    localStorage.setItem(key, JSON.stringify(storedData));
   }
 
   // Update an item in an array by ID. 
@@ -31,6 +33,7 @@ class StorageService {
       updateFn(array[index]);
       
       this.saveData(key, array);
+      localStorage.setItem(key, JSON.stringify(array));
       return array[index]; 
     }
     return null; 

@@ -64,13 +64,13 @@ function renderPost(post) {
   downvoteButton.classList.add("downvote-button");
   downvoteButton.classList.add("fa", "fa-thumbs-o-down");
 
-  
-  const createCommentContainer = document.createElement("div")
+  const createCommentContainer = document.createElement("div");
   createCommentContainer.classList.add("create-comment-container");
 
   const commentTextArea = document.createElement("textarea");
   commentTextArea.classList.add("comment-text-area");
   commentTextArea.setAttribute("placeholder", "Create comment");
+  commentTextArea.setAttribute("required", true);
 
   const createCommentBottomContainer = document.createElement("div");
   createCommentBottomContainer.classList.add("create-comment-bottom-container");
@@ -84,19 +84,41 @@ function renderPost(post) {
   commentSelectUserLabel.for = "users";
   commentSelectUserLabel.innerText = "Select a user:";
 
-
-  for (let user of users){
+  for (let user of users) {
     const option = document.createElement("option");
-    option.value = user.username;
+    option.value = user.id;
     option.innerText = user.username;
     commentSelectUser.append(option);
   }
 
-
   const createCommentButton = document.createElement("button");
   createCommentButton.classList.add("create-comment-button");
-  createCommentButton.innerText = "Comment"
+  createCommentButton.innerText = "Comment";
 
+  const commentsContainer = document.createElement("article");
+  commentsContainer.classList.add("comments-container");
+  const commentHr = document.createElement("hr");
+  commentHr.classList.add("comment-hr");
+
+  for (let comment of comments) {
+    if (post.id === comment.postId) {
+      const commentContainer = document.createElement("div");
+      const commentBody = document.createElement("p");
+      const commentUser = document.createElement("p");
+
+      commentBody.classList.add("comment-body");
+      commentUser.classList.add("comment-user");
+      commentContainer.classList.add("comment-container");
+
+      commentBody.innerHTML = comment.body;
+      commentUser.innerHTML = "user: " + comment.user.username;
+      
+      commentsContainer.append(commentContainer);
+      commentContainer.append(commentBody);
+      commentContainer.append(commentUser);
+
+    }
+  }
 
   mainContainer.append(articleElement);
   articleElement.append(postContainer);
@@ -111,14 +133,12 @@ function renderPost(post) {
     tagsContainer.append(tag);
   });
 
-
   postBottomContainer.append(authorContainer);
   authorContainer.append(authorContent);
   const match = users.find((obj) => obj.id === post.userId);
   if (match) {
     authorContent.innerText = "user: " + match.username;
   }
-
 
   postContainer.append(reactionsContainer);
   reactionsContainer.append(upvoteButton);
@@ -131,9 +151,13 @@ function renderPost(post) {
   createCommentBottomContainer.append(commentSelectUserLabel);
   createCommentBottomContainer.append(commentSelectUser);
   createCommentBottomContainer.append(createCommentButton);
+  
+  mainContainer.append(commentHr);
 
 
+  mainContainer.append(commentsContainer);
 
+  
 
   upvoteButton.addEventListener("click", () => {
     // Update the post and get the updated version
@@ -167,4 +191,39 @@ function renderPost(post) {
     reactionCounter.style.color = "rgb(153, 255, 0)";
   }
   reactionCounter.innerText = reactions;
+
+  createCommentButton.addEventListener("click", () => {
+    const commentContent = commentTextArea.value;
+    if (commentContent === '') {
+      alert("Comment field cannot be empty");
+      return;
+    }
+    let selectedUser = commentSelectUser.value;
+    let commentId = 1;
+
+    for (let user of users) {
+      if (parseInt(selectedUser) === user.id) {
+        selectedUser = user;
+        // return;
+      }
+    }
+    while (true) {
+      if (!comments.find(obj => obj.id === commentId)) {
+        console.log("break: " + commentId);
+        break;
+      }
+      console.log(commentId);
+      commentId ++;
+    }
+
+    storageService.saveData("comments", {
+      id: commentId,
+      body: commentContent,
+      postId: post.id,
+      user: { id: selectedUser.id, username: selectedUser.username },
+    });
+    console.log(selectedUser);
+    console.log(commentContent);
+    renderPost(post);
+  });
 }
