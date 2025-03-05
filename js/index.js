@@ -1,9 +1,56 @@
 import { api } from "./apiClient.js";
 import { storageService } from "./storageService.js";
+import { createPost } from "./createPost.js";
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const createPostButton = document.getElementById("nav-create-post-button");
+  const createPostForm = document.getElementById("create-post-form");
+  
+  const modalBlur = document.createElement("div");
+  modalBlur.classList.add("modal-blur");
+  document.body.appendChild(modalBlur);
+
+  // Open modal
+  createPostButton.addEventListener("click", () => {
+    document.body.classList.add("modal-open");
+  });
+
+  // Close modal when clicking overlay or potentially adding a close button
+  modalBlur.addEventListener("click", (e) => {
+    if (e.target === modalBlur) {
+      document.body.classList.remove("modal-open");
+    }
+  });
+
+  // Optional: Add close functionality to form
+  const closeModal = () => {
+    document.body.classList.remove("modal-open");
+  };
+  const tagSelector = document.getElementById("create-post-select-tags");
+    const posts = storageService.loadData("posts");
+    const tags = [];
+    for (let post of posts) {
+        tags.push(...post.tags);
+    }
+    const uniqueTags = [...new Set([...tags])];
+    for (let tag of uniqueTags){
+        const tagOption = document.createElement("option");
+        tagOption.value = tag;
+        tagOption.innerText = tag;
+        tagSelector.append(tagOption);
+    }
+
+  // You might want to add a close button to your form HTML
+  const closeButton = document.getElementById("close-post-form-button");
+  closeButton.textContent = "×";
+  closeButton.addEventListener("click", closeModal);
+});
 
 async function main() {
   const { posts, users, comments } = await api.getAllData();
   console.log({ posts, users, comments });
+
   renderPosts();
 }
 
@@ -139,5 +186,6 @@ function renderPosts() {
     reactionCounter.innerText = reactions;
   }
 }
+
 
 main();
