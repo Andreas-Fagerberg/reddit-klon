@@ -2,11 +2,18 @@ import { api } from "./apiClient.js";
 import { storageService } from "./storageService.js";
 import { createPost } from "./createPost.js";
 
-
 document.addEventListener("DOMContentLoaded", () => {
   const createPostButton = document.getElementById("nav-create-post-button");
   const createPostForm = document.getElementById("create-post-form");
-  
+  const createPostTitle = document.getElementById("create-post-title");
+  const createPostBody = document.getElementById("create-post-body");
+  const createPostSelect = document.getElementById("create-post-select-tags");
+  const createPostTags = document.getElementById("create-post-selected-tags");
+  const createPostSubmitButton = document.getElementById(
+    "create-post-submit-button"
+  );
+  const chosenTags = [];
+
   const modalBlur = document.createElement("div");
   modalBlur.classList.add("modal-blur");
   document.body.appendChild(modalBlur);
@@ -17,31 +24,62 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Close modal when clicking overlay or potentially adding a close button
-  modalBlur.addEventListener("click", (e) => {
-    if (e.target === modalBlur) {
+  modalBlur.addEventListener("click", (event) => {
+    if (event.target === modalBlur) {
       document.body.classList.remove("modal-open");
     }
   });
 
-  // Optional: Add close functionality to form
   const closeModal = () => {
     document.body.classList.remove("modal-open");
   };
-  const tagSelector = document.getElementById("create-post-select-tags");
-    const posts = storageService.loadData("posts");
-    const tags = [];
-    for (let post of posts) {
-        tags.push(...post.tags);
-    }
-    const uniqueTags = [...new Set([...tags])];
-    for (let tag of uniqueTags){
-        const tagOption = document.createElement("option");
-        tagOption.value = tag;
-        tagOption.innerText = tag;
-        tagSelector.append(tagOption);
-    }
 
-  // You might want to add a close button to your form HTML
+  const posts = storageService.loadData("posts");
+  const tags = [];
+  for (let post of posts) {
+    tags.push(...post.tags);
+  }
+  const uniqueTags = [...new Set([...tags])];
+  for (let tag of uniqueTags) {
+    const tagOption = document.createElement("option");
+    tagOption.value = tag;
+    tagOption.innerText = tag;
+    createPostSelect.append(tagOption);
+  }
+
+  createPostSelect.addEventListener("change", (event) => {
+    event.stopPropagation();
+    const tag = document.createElement("li");
+    tag.classList.add("post-tag");
+    if (!chosenTags.includes(createPostSelect.value) && chosenTags.length < 3) {
+      const tagText = document.createElement("span");
+      const removeIcon = document.createElement("span");
+      const tagValue = createPostSelect.value;
+
+      chosenTags.push(createPostSelect.value);
+
+      tagText.classList.add("tag-text");
+      tagText.textContent = createPostSelect.value;
+
+      removeIcon.classList.add("remove-tag");
+      removeIcon.textContent = "×";
+
+      tag.appendChild(tagText);
+      tag.appendChild(removeIcon);
+      createPostTags.append(tag);
+      tag.addEventListener("click", () => {
+        // Remove from DOM
+        tag.remove();
+        // Remove from array
+        const index = chosenTags.indexOf(tagValue); 
+        if (index > -1) {
+          chosenTags.splice(index, 1);
+        }
+        
+      });
+    }
+  });
+
   const closeButton = document.getElementById("close-post-form-button");
   closeButton.textContent = "×";
   closeButton.addEventListener("click", closeModal);
@@ -100,6 +138,7 @@ function renderPosts() {
     const tags = [];
     for (const tag of post.tags) {
       const tagElement = document.createElement("div");
+      tagElement.classList.add("post-tag");
       tagElement.innerText = tag;
       tags.push(tagElement);
     }
@@ -186,6 +225,5 @@ function renderPosts() {
     reactionCounter.innerText = reactions;
   }
 }
-
 
 main();

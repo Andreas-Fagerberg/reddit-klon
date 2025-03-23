@@ -40,7 +40,7 @@ body {
   display: flex;
   flex-direction: column;
   width: 100%;
-  min-height: 100vh ;
+  min-height: 100vh;
   margin: 0;
   padding: 0;
 }
@@ -155,7 +155,6 @@ nav a {
   width: 25%;
 
   box-sizing: border-box;
-
 }
 
 #nav-search-button:hover,
@@ -174,25 +173,25 @@ nav a {
   left: 50%;
   transform: translate(-50%, -50%);
   width: 80%;
-  max-width: 50rem; 
-  background-color: rgb(26, 33, 42); 
+  max-width: 50rem;
+  background-color: rgb(26, 33, 42);
   border-radius: 1rem;
   padding-top: 1rem;
   padding-left: 1rem;
   padding-right: 1rem;
   padding-bottom: 2rem;
-  z-index: 100; 
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  z-index: 100;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.modal-blur{
+.modal-blur {
   display: none;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0,0,0,0.5); /* Semi-transparent black */
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
   z-index: 99;
 }
 
@@ -220,8 +219,20 @@ nav a {
 
 #create-post-bottom-container {
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   margin-top: 1.6rem;
+}
+
+#create-post-tags-container {
+  display: flex;
+  margin-left: right;
+  align-items: center;
+}
+
+#post-tag-selection-label {
+  color: white;
+  margin-right: 0.5rem;
+  align-self: center;
 }
 
 #create-post-select-tags {
@@ -231,7 +242,28 @@ nav a {
   padding: 0.2rem;
   font-size: medium;
   border-radius: 0.4rem;
+  margin-left: 0;
+  margin-inline-end: 0;
+}
+
+#selected-tags-heading {
+  margin: 0;
+  padding: 0;
   margin-right: auto;
+  color: white;
+  padding-left: 2rem;
+  margin-right: 0.5rem;
+}
+
+#create-post-selected-tags {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+  color: white;
+  padding: 0;
+  margin: 0;
+  margin-right: auto;
+  /* flex-direction: column; */
 }
 
 #create-post-submit-button {
@@ -242,12 +274,10 @@ nav a {
   border-radius: 2rem;
   background-color: rgb(44, 45, 50);
   padding: 0.6rem;
+  margin-left: auto;
   /* font-size: larger; */
   color: white;
 }
-
-
-
 
 article {
   width: 85%;
@@ -320,9 +350,11 @@ article {
   cursor: default;
 }
 
-.tags-container > div {
+.tags-container > .post-tag {
   margin-top: 0.8rem;
   margin-right: 0.8rem;
+}
+.post-tag {
   border-radius: 0.2rem;
   background-color: rgb(65, 66, 71);
   padding: 0.2rem;
@@ -331,8 +363,26 @@ article {
   cursor: pointer;
 }
 
-.tags-container > div:hover {
-  background-color: rgb(138, 134, 134);
+.post-tag:hover {
+
+}
+
+#create-post-form .post-tag {
+  cursor: pointer;
+}
+
+#create-post-form .post-tag:hover .tag-text {
+  text-decoration: line-through;
+}
+
+.post-tag:hover > .remove-tag {
+  text-decoration: none;
+}
+
+#create-post-form .remove-tag {
+  margin-left: 5px;
+  font-weight: bold;
+  color: rgb(241, 66, 66);
 }
 
 .author-container {
@@ -353,7 +403,6 @@ article {
   overflow: hidden;
   align-items: stretch;
   background-color: rgb(44, 45, 50);
- 
 }
 
 .upvote-button:before,
@@ -370,7 +419,7 @@ article {
   display: flex; /* Add this */
   align-items: center; /* Add this */
   cursor: pointer; /* For better UX */
-  
+
   /* box-sizing: border-box; */
   /* padding: 0.7rem; */
 }
@@ -397,7 +446,6 @@ article {
 .downvote-button:hover {
   background-color: rgb(70, 72, 79);
 }
-
 
 /* || Main styles non container */
 

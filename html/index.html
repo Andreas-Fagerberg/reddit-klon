@@ -9,8 +9,11 @@
       href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="/css/style.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
     <script type="module" src="/js/apiClient.js"></script>
     <script type="module" src="/js/index.js"></script>
     <script type="module" src="/js/models/comment.js"></script>
@@ -64,20 +67,34 @@
         <div id="create-post-form">
           <button id="close-post-form-button">×</button>
 
-          <input type="text" name="create-post-title" id="create-post-title" placeholder="Title">
-          <textarea name="create-post-body" id="create-post-text-area" placeholder="body"></textarea>
+          <input
+            type="text"
+            name="create-post-title"
+            id="create-post-title"
+            placeholder="Title"
+          />
+          <textarea
+            name="create-post-body"
+            id="create-post-text-area"
+            placeholder="body"
+          ></textarea>
           <div id="create-post-bottom-container">
-            <label for="post-tag-selection">Select tags: </label>
-            <select name="post-tag-selection" id="create-post-select-tags">
-            
-            </select>
+            <label for="post-tag-selection" id="post-tag-selection-label">Select tags (Max 3): </label>
+
+            <select
+              name="post-tag-selection"
+              id="create-post-select-tags"
+            ></select>
+            <div id="create-post-tags-container">
+              <h4 id="selected-tags-heading"> selected tags:</h4>
+              <ul id="create-post-selected-tags">
+              </ul>
+            </div>
+
             <button id="create-post-submit-button">Post</button>
           </div>
-
-
         </div>
         <div id="main-content">
-          
           <!-- <div class="post-container">
             <h3 class="post-heading">TITLE</h3>
             <div class="post-top-container">
