@@ -64,7 +64,7 @@
       </header>
       <main>
         <div class="sidebar" id="main-left-sidebar"></div>
-        <div id="create-post-form">
+        <div id="create-post-container">
           <button id="close-post-form-button">×</button>
 
           <input
@@ -76,21 +76,27 @@
           <textarea
             name="create-post-body"
             id="create-post-text-area"
-            placeholder="body"
+            placeholder="Body"
           ></textarea>
-          <div id="create-post-bottom-container">
-            <label for="post-tag-selection" id="post-tag-selection-label">Select tags (Max 3): </label>
-
+          <div id="create-post-tags-container">
+            <label for="post-tag-selection" id="post-tag-selection-label"
+              >Select tags (Max 3):
+            </label>
             <select
               name="post-tag-selection"
               id="create-post-select-tags"
             ></select>
-            <div id="create-post-tags-container">
-              <h4 id="selected-tags-heading"> selected tags:</h4>
-              <ul id="create-post-selected-tags">
-              </ul>
-            </div>
-
+            <h4 id="selected-tags-heading">selected tags:</h4>
+            <ul id="selected-tags"></ul>
+          </div>
+          <div id="create-post-bottom-container">
+            <label for="post-tag-selection" id="post-tag-selection-label"
+              >Select user:
+            </label>
+            <select
+              name="post-tag-selection"
+              id="create-post-select-user"
+            ></select>
             <button id="create-post-submit-button">Post</button>
           </div>
         </div>

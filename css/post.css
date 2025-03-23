@@ -36,6 +36,10 @@ body {
   font-family: Inter, Geneva, Verdana, sans-serif;
 }
 
+button {
+  cursor: pointer;
+}
+
 #page-wrapper {
   display: flex;
   flex-direction: column;
@@ -312,6 +316,7 @@ article {
   padding-bottom: 2rem;
   /* border-bottom: 0.01rem solid rgb(51, 59, 69); */
 }
+
 .comment-text-area {
   min-height: 10rem;
   max-width: 100%;

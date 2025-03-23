@@ -204,7 +204,6 @@ function renderPost(post) {
     for (let user of users) {
       if (parseInt(selectedUser) === user.id) {
         selectedUser = user;
-        // return;
       }
     }
     while (true) {

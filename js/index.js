@@ -4,11 +4,12 @@ import { createPost } from "./createPost.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const createPostButton = document.getElementById("nav-create-post-button");
-  const createPostForm = document.getElementById("create-post-form");
+  const createPostForm = document.getElementById("create-post-container");
   const createPostTitle = document.getElementById("create-post-title");
-  const createPostBody = document.getElementById("create-post-body");
-  const createPostSelect = document.getElementById("create-post-select-tags");
-  const createPostTags = document.getElementById("create-post-selected-tags");
+  const createPostTextArea = document.getElementById("create-post-text-area");
+  const createPostSelectTag = document.getElementById("create-post-select-tags");
+  const createPostTags = document.getElementById("selected-tags");
+  const createPostSelectUser = document.getElementById("create-post-select-user")
   const createPostSubmitButton = document.getElementById(
     "create-post-submit-button"
   );
@@ -21,6 +22,12 @@ document.addEventListener("DOMContentLoaded", () => {
   // Open modal
   createPostButton.addEventListener("click", () => {
     document.body.classList.add("modal-open");
+    createPostTextArea.value = "";
+    createPostTitle.value = "";
+    chosenTags.length = 0;
+    createPostTags.innerHTML = ""
+    createPostSelectTag.selectedIndex = 0;
+    createPostSelectUser.selectedIndex = 0;
   });
 
   // Close modal when clicking overlay or potentially adding a close button
@@ -36,6 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const posts = storageService.loadData("posts");
   const tags = [];
+  
   for (let post of posts) {
     tags.push(...post.tags);
   }
@@ -44,22 +52,31 @@ document.addEventListener("DOMContentLoaded", () => {
     const tagOption = document.createElement("option");
     tagOption.value = tag;
     tagOption.innerText = tag;
-    createPostSelect.append(tagOption);
+    createPostSelectTag.append(tagOption);
   }
 
-  createPostSelect.addEventListener("change", (event) => {
+  const users = storageService.loadData("users");
+
+  for (let user of users) {
+    const option = document.createElement("option");
+    option.value = user.id;
+    option.innerText = user.username;
+    createPostSelectUser.append(option);
+  }
+
+  createPostSelectTag.addEventListener("change", (event) => {
     event.stopPropagation();
     const tag = document.createElement("li");
     tag.classList.add("post-tag");
-    if (!chosenTags.includes(createPostSelect.value) && chosenTags.length < 3) {
+    if (!chosenTags.includes(createPostSelectTag.value) && chosenTags.length < 3) {
       const tagText = document.createElement("span");
       const removeIcon = document.createElement("span");
-      const tagValue = createPostSelect.value;
+      const tagValue = createPostSelectTag.value;
 
-      chosenTags.push(createPostSelect.value);
+      chosenTags.push(createPostSelectTag.value);
 
       tagText.classList.add("tag-text");
-      tagText.textContent = createPostSelect.value;
+      tagText.textContent = createPostSelectTag.value;
 
       removeIcon.classList.add("remove-tag");
       removeIcon.textContent = "×";
@@ -75,9 +92,53 @@ document.addEventListener("DOMContentLoaded", () => {
         if (index > -1) {
           chosenTags.splice(index, 1);
         }
-        
       });
     }
+  });
+
+  // TODO: Implement create post functionality. Repurpose createcomment code.
+  createPostSubmitButton.addEventListener("click", () => {
+    const posts = storageService.loadData("posts");
+    const postContent = createPostTextArea.value;
+    const postTitle = createPostTitle.value;
+    if (postContent === '') {
+      alert("Post body cannot be empty");
+      return;
+    }
+    if (postTitle === '') {
+      alert("Post title cannot be empty");
+      return;
+    }
+
+    let selectedUser = createPostSelectUser.value;
+    let postId = 1;
+
+    for (let user of users) {
+      if (parseInt(selectedUser) === user.id) {
+        selectedUser = user;
+      }
+    }
+    while (true) {
+      if (!posts.find(obj => obj.id === postId)) {
+        console.log("break: " + postId);
+        break;
+      }
+      console.log(postId);
+      postId ++;
+    }
+
+    storageService.saveData("posts", {
+      id: postId,
+      title: postTitle,
+      body: postContent,
+      tags: chosenTags,
+      reactions: { likes: 0, dislikes: 0},
+      views: 0,
+      userId: selectedUser.id,
+    });
+    console.log(selectedUser);
+    console.log(postContent);
+    renderPosts();
   });
 
   const closeButton = document.getElementById("close-post-form-button");
