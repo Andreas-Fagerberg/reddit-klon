@@ -4,7 +4,6 @@ import { createPost } from "./createPost.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const createPostButton = document.getElementById("nav-create-post-button");
-  const createPostForm = document.getElementById("create-post-container");
   const createPostTitle = document.getElementById("create-post-title");
   const createPostTextArea = document.getElementById("create-post-text-area");
   const createPostSelectTag = document.getElementById("create-post-select-tags");
@@ -158,7 +157,9 @@ function renderPosts() {
   mainContainer.innerHTML = "";
   const posts = storageService.loadData("posts");
   const users = storageService.loadData("users");
-  for (const post of posts) {
+  const reversedPosts = [...posts].reverse();
+
+  for (const post of reversedPosts) {
     const articleElement = document.createElement("article");
     articleElement.setAttribute("data-post-id", post.id);
     articleElement.setAttribute("role", "link");
