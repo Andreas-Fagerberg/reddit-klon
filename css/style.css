@@ -1,29 +1,3 @@
-/* || WIP styles. Mostly borders and such
-body {
-
-  border: 2px solid yellow;
-}
-
-#page-wrapper {
-  border: 2px solid pink;
-}
-
-nav {
-  border: 2px solid red;
-}
-
-#nav-links {
-  border: 2px solid rebeccapurple;
-}
-
-.nav-item {
-  border: 2px solid greenyellow;
-}
-
-main > div{
-  border: 1px solid skyblue;
-} 
- */
 .post-main-container {
   border: 1px solid rgb(142, 142, 142);
 }
@@ -55,7 +29,7 @@ header {
   height: 5rem;
   align-items: center;
   border-bottom: 0.02rem solid rgb(39, 48, 59);
-  box-sizing: border-box;
+  box-sizing: border-box;  
 }
 
 /* || Nav styles */
@@ -83,8 +57,6 @@ nav a {
   width: 27rem;
   border-radius: 2rem;
   overflow: hidden;
-  /* max-width: 50%; */
-  /* height: 2.2rem; */
 }
 
 #nav-create-post-container {
@@ -94,7 +66,6 @@ nav a {
   flex: 1;
   margin-left: auto;
   align-items: center;
-  /* white-space: nowrap; */
 }
 
 #nav-create-post-container,
@@ -185,7 +156,6 @@ nav a {
   padding-right: 1rem;
   padding-bottom: 2rem;
   z-index: 100;
-  /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
 }
 
 .modal-blur {
@@ -195,7 +165,7 @@ nav a {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+  background-color: rgba(0, 0, 0, 0.5); 
   z-index: 99;
 }
 
@@ -218,7 +188,6 @@ nav a {
 }
 
 #create-post-title:focus {
-  /* outline: none !important; */
   box-shadow: 0, 0, 234rem red;
 }
 
@@ -280,7 +249,6 @@ nav a {
   padding: 0;
   margin: 0;
   margin-right: auto;
-  /* flex-direction: column; */
 }
 
 #create-post-bottom-container {
@@ -335,13 +303,8 @@ article {
   background-color: rgb(26, 33, 42);
 }
 
-#post-heading {
-  /* padding-top: 0.3rem; */
-}
-
 .post-container > h3 {
   padding-left: 0.5rem;
-  /* padding-top: 0.5rem; */
   margin-top: 0.7rem;
   margin-bottom: 0.1rem;
 }
@@ -349,19 +312,12 @@ article {
 .post-top-container {
   display: flex;
   align-self: center;
-
   width: 98%;
-  /* border-top: 0.1rem solid rgb(127, 130, 140); */
-  /* border-radius: 0.2rem; */
-  /* margin-top: 1rem; */
   margin-bottom: 0.9rem;
 }
 
 #main-content article:last-child {
   border-bottom: none;
-}
-.post-top-container > p {
-  /* padding-: 0.4rem; */
 }
 
 .post-bottom-container {
@@ -390,9 +346,6 @@ article {
   font-weight: 600;
   font-size: 0.9rem;
   cursor: pointer;
-}
-
-.post-tag:hover {
 }
 
 #create-post-text-area {
@@ -448,21 +401,18 @@ article {
   background-color: inherit;
   border: none;
   font-size: 0.9rem;
-  display: flex; /* Add this */
-  align-items: center; /* Add this */
-  cursor: pointer; /* For better UX */
-
-  /* box-sizing: border-box; */
-  /* padding: 0.7rem; */
+  display: flex; 
+  align-items: center; 
+  cursor: pointer; 
 }
 
 .upvote-button {
   color: rgb(153, 255, 0);
-  padding: 0.7rem 0.4rem 0.7rem 0.7rem; /* Full vertical padding */
+  padding: 0.7rem 0.4rem 0.7rem 0.7rem; 
 }
 .downvote-button {
   color: rgb(242, 43, 43);
-  padding: 0.7rem 0.7rem 0.7rem 0.4rem; /* Full vertical padding */
+  padding: 0.7rem 0.7rem 0.7rem 0.4rem; 
 }
 .reaction-counter {
   font-variant-numeric: tabular-nums;
@@ -485,8 +435,6 @@ main {
   display: flex;
   width: 100%;
   height: fit-content;
-
-  /* border-bottom: 0.02rem solid rgba(176, 176, 176, 0.163); */
 }
 
 .sidebar {
@@ -504,8 +452,6 @@ main {
   flex-direction: column;
   width: 50%;
   align-items: center;
-  /* border-left: 0.001rem solid rgb(39, 48, 59); */
-  /* border-right: 0.001rem solid rgb(39, 48, 59); */
 }
 
 /* || Footer styles */
@@ -513,9 +459,7 @@ main {
 footer {
   color: rgb(255, 255, 255);
   display: flex;
-  /* margin: 1rem; */
   height: fit-content;
   padding: 0.9rem;
   margin-top: auto;
-  /* border-top: 0.01rem solid rgb(51, 59, 69); */
 }

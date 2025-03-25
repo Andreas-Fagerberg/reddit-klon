@@ -1,6 +1,5 @@
 import { api } from "./apiClient.js";
 import { storageService } from "./storageService.js";
-import { createPost } from "./createPost.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const createPostButton = document.getElementById("nav-create-post-button");
@@ -18,7 +17,6 @@ document.addEventListener("DOMContentLoaded", () => {
   modalBlur.classList.add("modal-blur");
   document.body.appendChild(modalBlur);
 
-  // Open modal
   createPostButton.addEventListener("click", () => {
     document.body.classList.add("modal-open");
     createPostTextArea.value = "";
@@ -29,7 +27,6 @@ document.addEventListener("DOMContentLoaded", () => {
     createPostSelectUser.selectedIndex = 0;
   });
 
-  // Close modal when clicking overlay or potentially adding a close button
   modalBlur.addEventListener("click", (event) => {
     if (event.target === modalBlur) {
       document.body.classList.remove("modal-open");
@@ -95,7 +92,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // TODO: Implement create post functionality. Repurpose createcomment code.
   createPostSubmitButton.addEventListener("click", () => {
     const posts = storageService.loadData("posts");
     const postContent = createPostTextArea.value;

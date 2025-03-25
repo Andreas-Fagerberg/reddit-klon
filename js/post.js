@@ -112,11 +112,10 @@ function renderPost(post) {
 
       commentBody.innerHTML = comment.body;
       commentUser.innerHTML = "user: " + comment.user.username;
-      
+
       commentsContainer.append(commentContainer);
       commentContainer.append(commentBody);
       commentContainer.append(commentUser);
-
     }
   }
 
@@ -126,7 +125,6 @@ function renderPost(post) {
   postContainer.append(postTopContainer);
   postTopContainer.append(postContent);
   postContent.innerText = post.body;
-
   postContainer.append(postBottomContainer);
   postBottomContainer.append(tagsContainer);
   tags.forEach((tag) => {
@@ -144,20 +142,16 @@ function renderPost(post) {
   reactionsContainer.append(upvoteButton);
   reactionsContainer.append(reactionCounter);
   reactionsContainer.append(downvoteButton);
-
   mainContainer.append(createCommentContainer);
   createCommentContainer.append(commentTextArea);
   createCommentContainer.append(createCommentBottomContainer);
   createCommentBottomContainer.append(commentSelectUserLabel);
   createCommentBottomContainer.append(commentSelectUser);
   createCommentBottomContainer.append(createCommentButton);
-  
+
   mainContainer.append(commentHr);
 
-
   mainContainer.append(commentsContainer);
-
-  
 
   upvoteButton.addEventListener("click", () => {
     // Update the post and get the updated version
@@ -194,7 +188,7 @@ function renderPost(post) {
 
   createCommentButton.addEventListener("click", () => {
     const commentContent = commentTextArea.value;
-    if (commentContent === '') {
+    if (commentContent === "") {
       alert("Comment field cannot be empty");
       return;
     }
@@ -207,12 +201,12 @@ function renderPost(post) {
       }
     }
     while (true) {
-      if (!comments.find(obj => obj.id === commentId)) {
+      if (!comments.find((obj) => obj.id === commentId)) {
         console.log("break: " + commentId);
         break;
       }
       console.log(commentId);
-      commentId ++;
+      commentId++;
     }
 
     storageService.saveData("comments", {

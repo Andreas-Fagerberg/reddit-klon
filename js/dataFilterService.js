@@ -3,7 +3,7 @@ class DataFilterService {
     const uniqueUserIds = [...new Set(posts.map((post) => post.userId))];
     const postIds = posts.map((post) => post.id);
 
-    // Filter comments that belong to our posts
+    // Filter comments that belong to fetched posts
     const matchingComments = comments.filter((comment) =>
       postIds.includes(comment.postId)
     );
