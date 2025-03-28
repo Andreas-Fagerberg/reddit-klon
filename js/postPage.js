@@ -1,4 +1,5 @@
 import { storageService } from "./storageService.js";
+import { Comment } from "./models/comment.js";
 
 // Get post from localstorage with urlparam post id
 document.addEventListener("DOMContentLoaded", () => {
@@ -209,12 +210,18 @@ function renderPost(post) {
       commentId++;
     }
 
-    storageService.saveData("comments", {
-      id: commentId,
-      body: commentContent,
-      postId: post.id,
-      user: { id: selectedUser.id, username: selectedUser.username },
-    });
+    storageService.saveData(
+      "comments",
+      new Comment(
+        commentId, 
+        commentContent, 
+        post.id, 
+        {
+        id: selectedUser.id,
+        username: selectedUser.username,
+      }
+    )
+    );
     console.log(selectedUser);
     console.log(commentContent);
     renderPost(post);

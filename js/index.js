@@ -1,13 +1,18 @@
 import { api } from "./apiClient.js";
 import { storageService } from "./storageService.js";
+import { Post } from "./models/post.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const createPostButton = document.getElementById("nav-create-post-button");
   const createPostTitle = document.getElementById("create-post-title");
   const createPostTextArea = document.getElementById("create-post-text-area");
-  const createPostSelectTag = document.getElementById("create-post-select-tags");
+  const createPostSelectTag = document.getElementById(
+    "create-post-select-tags"
+  );
   const createPostTags = document.getElementById("selected-tags");
-  const createPostSelectUser = document.getElementById("create-post-select-user")
+  const createPostSelectUser = document.getElementById(
+    "create-post-select-user"
+  );
   const createPostSubmitButton = document.getElementById(
     "create-post-submit-button"
   );
@@ -22,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
     createPostTextArea.value = "";
     createPostTitle.value = "";
     chosenTags.length = 0;
-    createPostTags.innerHTML = ""
+    createPostTags.innerHTML = "";
     createPostSelectTag.selectedIndex = 0;
     createPostSelectUser.selectedIndex = 0;
   });
@@ -39,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const posts = storageService.loadData("posts");
   const tags = [];
-  
+
   for (let post of posts) {
     tags.push(...post.tags);
   }
@@ -64,7 +69,10 @@ document.addEventListener("DOMContentLoaded", () => {
     event.stopPropagation();
     const tag = document.createElement("li");
     tag.classList.add("post-tag");
-    if (!chosenTags.includes(createPostSelectTag.value) && chosenTags.length < 3) {
+    if (
+      !chosenTags.includes(createPostSelectTag.value) &&
+      chosenTags.length < 3
+    ) {
       const tagText = document.createElement("span");
       const removeIcon = document.createElement("span");
       const tagValue = createPostSelectTag.value;
@@ -84,7 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // Remove from DOM
         tag.remove();
         // Remove from array
-        const index = chosenTags.indexOf(tagValue); 
+        const index = chosenTags.indexOf(tagValue);
         if (index > -1) {
           chosenTags.splice(index, 1);
         }
@@ -96,11 +104,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const posts = storageService.loadData("posts");
     const postContent = createPostTextArea.value;
     const postTitle = createPostTitle.value;
-    if (postContent === '') {
+    if (postContent === "") {
       alert("Post body cannot be empty");
       return;
     }
-    if (postTitle === '') {
+    if (postTitle === "") {
       alert("Post title cannot be empty");
       return;
     }
@@ -114,25 +122,28 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
     while (true) {
-      if (!posts.find(obj => obj.id === postId)) {
+      if (!posts.find((obj) => obj.id === postId)) {
         console.log("break: " + postId);
         break;
       }
       console.log(postId);
-      postId ++;
+      postId++;
     }
 
-    storageService.saveData("posts", {
-      id: postId,
-      title: postTitle,
-      body: postContent,
-      tags: chosenTags,
-      reactions: { likes: 0, dislikes: 0},
-      views: 0,
-      userId: selectedUser.id,
-    });
-    console.log(selectedUser);
-    console.log(postContent);
+    console.log("Selected User Value:", createPostSelectUser.value);
+console.log("Users:", users);
+console.log("Selected User Object:", selectedUser);
+    storageService.saveData(
+      "posts",
+      new Post(
+        postId,
+        postTitle,
+        postContent,
+        chosenTags,
+        { likes: 0, dislikes: 0 },
+        selectedUser.id
+      )
+    );
     renderPosts();
   });
 
@@ -170,7 +181,7 @@ function renderPosts() {
       // data-post-id gets converted to camelCase when it is accessd by dataset which means: data-post-id => postId.
       // So we point to postId here in order to access the correct dataset.
       const postId = event.currentTarget.dataset.postId;
-      window.location.href = `post.html?id=${postId}`;
+      window.location.href = `postPage.html?id=${postId}`;
     });
     const postContainer = document.createElement("div");
     postContainer.classList.add("post-container");
@@ -251,29 +262,19 @@ function renderPosts() {
     reactionsContainer.append(downvoteButton);
 
     upvoteButton.addEventListener("click", () => {
-      // Update the post and get the updated version
-      const updatedPost = storageService.updateArrayItem(
-        "posts",
-        post.id,
-        (item) => {
-          item.reactions.likes++;
-        }
-      );
+      storageService.updateArrayItem("posts", post.id, (item) => {
+        item.reactions.likes++;
+      });
 
       renderPosts();
     });
 
     downvoteButton.addEventListener("click", () => {
-      const updatedPost = storageService.updateArrayItem(
-        "posts",
-        post.id,
-        (item) => {
-          item.reactions.dislikes++;
-        }
-      );
+      storageService.updateArrayItem("posts", post.id, (item) => {
+        item.reactions.dislikes++;
+      });
       renderPosts();
     });
-    // upvoteButton.innerText = "fa fa-thumbs-o-up"
     const reactions = post.reactions.likes - post.reactions.dislikes;
     if (reactions < 0) {
       reactionCounter.style.color = "rgb(242, 43, 43)";
