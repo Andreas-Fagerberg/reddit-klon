@@ -1,12 +1,8 @@
 import { storageService } from "./storageService.js";
 import { Comment } from "./models/comment.js";
 
-// Get post from localstorage with urlparam post id
 document.addEventListener("DOMContentLoaded", () => {
-  // Create a URLSearchParams object from the current URL
   const urlParams = new URLSearchParams(window.location.search);
-
-  // Get the post ID from the URL parameters
   const postId = urlParams.get("id");
   const posts = storageService.loadData("posts");
   const post = posts.find((obj) => obj.id === parseInt(postId));
@@ -17,89 +13,176 @@ document.addEventListener("DOMContentLoaded", () => {
 function renderPost(post) {
   const mainContainer = document.getElementById("main-content");
   mainContainer.innerHTML = "";
-  const articleElement = document.createElement("article");
+  
   const users = storageService.loadData("users");
   const comments = storageService.loadData("comments");
+  
+  // Create the post structure
+  const articleElement = document.createElement("article");
+  const postContainer = createPostContainer(post, users);
+  
+  // Add everything to the DOM
+  mainContainer.append(articleElement);
+  articleElement.append(postContainer);
+  
+  // Add comment section
+  createCommentSection(users, comments, post, mainContainer);
+}
 
+function createPostContainer(post, users) {
   const postContainer = document.createElement("div");
   postContainer.classList.add("post-container");
-
+  
   const postHeading = document.createElement("h3");
   postHeading.classList.add("post-heading");
   postHeading.innerText = post.title;
+  postContainer.append(postHeading);
+  
+  const postTopContainer = createPostTopContainer(post);
+  postContainer.append(postTopContainer);
+  
+  const postBottomContainer = createPostBottomContainer(post, users);
+  postContainer.append(postBottomContainer);
+  
+  const reactionsContainer = createReactionsContainer(post);
+  postContainer.append(reactionsContainer);
+  
+  return postContainer;
+}
 
+function createPostTopContainer(post) {
   const postTopContainer = document.createElement("div");
   postTopContainer.classList.add("post-top-container");
-
+  
   const postContent = document.createElement("p");
+  postContent.innerText = post.body;
+  postTopContainer.append(postContent);
+  
+  return postTopContainer;
+}
 
+function createPostBottomContainer(post, users) {
   const postBottomContainer = document.createElement("div");
   postBottomContainer.classList.add("post-bottom-container");
-
+  
   const tagsContainer = document.createElement("div");
   tagsContainer.classList.add("tags-container");
-
-  const authorContainer = document.createElement("div");
-  authorContainer.classList.add("author-container");
-
-  const tags = [];
+  postBottomContainer.append(tagsContainer);
+  
   for (const tag of post.tags) {
     const tagElement = document.createElement("div");
     tagElement.innerText = tag;
-    tags.push(tagElement);
+    tagsContainer.append(tagElement);
   }
-
+  
+  const authorContainer = document.createElement("div");
+  authorContainer.classList.add("author-container");
+  postBottomContainer.append(authorContainer);
+  
   const authorContent = document.createElement("p");
+  authorContainer.append(authorContent);
+  
+  const match = users.find((obj) => obj.id === post.userId);
+  if (match) {
+    authorContent.innerText = "user: " + match.username;
+  }
+  
+  return postBottomContainer;
+}
 
+function createReactionsContainer(post) {
   const reactionsContainer = document.createElement("div");
   reactionsContainer.classList.add("reactions-container");
-
+  
   const upvoteButton = document.createElement("button");
-  upvoteButton.classList.add("upvote-button");
-  upvoteButton.classList.add("fa", "fa-thumbs-o-up");
-
+  upvoteButton.classList.add("upvote-button", "fa", "fa-thumbs-o-up");
+  reactionsContainer.append(upvoteButton);
+  
   const reactionCounter = document.createElement("p");
   reactionCounter.classList.add("reaction-counter");
+  reactionsContainer.append(reactionCounter);
+  
   const downvoteButton = document.createElement("button");
+  downvoteButton.classList.add("downvote-button", "fa", "fa-thumbs-o-down");
+  reactionsContainer.append(downvoteButton);
+  
+  upvoteButton.addEventListener("click", () => {
+    const updatedPost = storageService.updateArrayItem(
+      "posts",
+      post.id,
+      (item) => {
+        item.reactions.likes++;
+      }
+    );
+    renderPost(updatedPost);
+  });
+  
+  downvoteButton.addEventListener("click", () => {
+    const updatedPost = storageService.updateArrayItem(
+      "posts",
+      post.id,
+      (item) => {
+        item.reactions.dislikes++;
+      }
+    );
+    renderPost(updatedPost);
+  });
+  
 
-  downvoteButton.classList.add("downvote-button");
-  downvoteButton.classList.add("fa", "fa-thumbs-o-down");
+  const reactions = post.reactions.likes - post.reactions.dislikes;
+  reactionCounter.style.color = reactions < 0 ? "rgb(242, 43, 43)" : "rgb(153, 255, 0)";
+  reactionCounter.innerText = reactions;
+  
+  return reactionsContainer;
+}
 
-  const createCommentContainer = document.createElement("div");
-  createCommentContainer.classList.add("create-comment-container");
+function createCommentSection(users, comments, post, mainContainer) {
+
+  const formContainer = document.createElement("div");
+  formContainer.classList.add("create-comment-container");
 
   const commentTextArea = document.createElement("textarea");
   commentTextArea.classList.add("comment-text-area");
   commentTextArea.setAttribute("placeholder", "Create comment");
   commentTextArea.setAttribute("required", true);
 
-  const createCommentBottomContainer = document.createElement("div");
-  createCommentBottomContainer.classList.add("create-comment-bottom-container");
+  const formBottomContainer = document.createElement("div");
+  formBottomContainer.classList.add("create-comment-bottom-container");
 
-  const commentSelectUser = document.createElement("select");
-  commentSelectUser.classList.add("comment-select-user");
-  commentSelectUser.name = "users";
+  const userSelect = document.createElement("select");
+  userSelect.classList.add("comment-select-user");
+  userSelect.name = "users";
 
-  const commentSelectUserLabel = document.createElement("label");
-  commentSelectUserLabel.classList.add("comment-select-user-label");
-  commentSelectUserLabel.for = "users";
-  commentSelectUserLabel.innerText = "Select a user:";
+  const userSelectLabel = document.createElement("label");
+  userSelectLabel.classList.add("comment-select-user-label");
+  userSelectLabel.for = "users";
+  userSelectLabel.innerText = "Select a user:";
 
   for (let user of users) {
     const option = document.createElement("option");
     option.value = user.id;
     option.innerText = user.username;
-    commentSelectUser.append(option);
+    userSelect.append(option);
   }
 
-  const createCommentButton = document.createElement("button");
-  createCommentButton.classList.add("create-comment-button");
-  createCommentButton.innerText = "Comment";
+  const submitButton = document.createElement("button");
+  submitButton.classList.add("create-comment-button");
+  submitButton.innerText = "Comment";
+
+  formContainer.append(commentTextArea);
+  formContainer.append(formBottomContainer);
+  formBottomContainer.append(userSelectLabel);
+  formBottomContainer.append(userSelect);
+  formBottomContainer.append(submitButton);
+  mainContainer.append(formContainer);
+
 
   const commentsContainer = document.createElement("article");
   commentsContainer.classList.add("comments-container");
-  const commentHr = document.createElement("hr");
-  commentHr.classList.add("comment-hr");
+
+  const divider = document.createElement("hr");
+  divider.classList.add("comment-hr");
+
 
   for (let comment of comments) {
     if (post.id === comment.postId) {
@@ -120,80 +203,13 @@ function renderPost(post) {
     }
   }
 
-  mainContainer.append(articleElement);
-  articleElement.append(postContainer);
-  postContainer.append(postHeading);
-  postContainer.append(postTopContainer);
-  postTopContainer.append(postContent);
-  postContent.innerText = post.body;
-  postContainer.append(postBottomContainer);
-  postBottomContainer.append(tagsContainer);
-  tags.forEach((tag) => {
-    tagsContainer.append(tag);
-  });
-
-  postBottomContainer.append(authorContainer);
-  authorContainer.append(authorContent);
-  const match = users.find((obj) => obj.id === post.userId);
-  if (match) {
-    authorContent.innerText = "user: " + match.username;
-  }
-
-  postContainer.append(reactionsContainer);
-  reactionsContainer.append(upvoteButton);
-  reactionsContainer.append(reactionCounter);
-  reactionsContainer.append(downvoteButton);
-  mainContainer.append(createCommentContainer);
-  createCommentContainer.append(commentTextArea);
-  createCommentContainer.append(createCommentBottomContainer);
-  createCommentBottomContainer.append(commentSelectUserLabel);
-  createCommentBottomContainer.append(commentSelectUser);
-  createCommentBottomContainer.append(createCommentButton);
-
-  mainContainer.append(commentHr);
-
-  mainContainer.append(commentsContainer);
-
-  upvoteButton.addEventListener("click", () => {
-    // Update the post and get the updated version
-    const updatedPost = storageService.updateArrayItem(
-      "posts",
-      post.id,
-      (item) => {
-        item.reactions.likes++;
-      }
-    );
-
-    renderPost(updatedPost);
-  });
-
-  downvoteButton.addEventListener("click", () => {
-    const updatedPost = storageService.updateArrayItem(
-      "posts",
-      post.id,
-      (item) => {
-        item.reactions.dislikes++;
-      }
-    );
-    renderPost(updatedPost);
-  });
-
-  // upvoteButton.innerText = "fa fa-thumbs-o-up"
-  const reactions = post.reactions.likes - post.reactions.dislikes;
-  if (reactions < 0) {
-    reactionCounter.style.color = "rgb(242, 43, 43)";
-  } else {
-    reactionCounter.style.color = "rgb(153, 255, 0)";
-  }
-  reactionCounter.innerText = reactions;
-
-  createCommentButton.addEventListener("click", () => {
+  submitButton.addEventListener("click", () => {
     const commentContent = commentTextArea.value;
     if (commentContent === "") {
       alert("Comment field cannot be empty");
       return;
     }
-    let selectedUser = commentSelectUser.value;
+    let selectedUser = userSelect.value;
     let commentId = 1;
 
     for (let user of users) {
@@ -212,18 +228,18 @@ function renderPost(post) {
 
     storageService.saveData(
       "comments",
-      new Comment(
-        commentId, 
-        commentContent, 
-        post.id, 
-        {
+      new Comment(commentId, commentContent, post.id, {
         id: selectedUser.id,
         username: selectedUser.username,
-      }
-    )
+      })
     );
     console.log(selectedUser);
     console.log(commentContent);
     renderPost(post);
   });
+
+  mainContainer.append(divider);
+  mainContainer.append(commentsContainer);
+
+  return formContainer;
 }

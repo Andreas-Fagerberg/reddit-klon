@@ -131,8 +131,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     console.log("Selected User Value:", createPostSelectUser.value);
-console.log("Users:", users);
-console.log("Selected User Object:", selectedUser);
+    console.log("Users:", users);
+    console.log("Selected User Object:", selectedUser);
     storageService.saveData(
       "posts",
       new Post(
